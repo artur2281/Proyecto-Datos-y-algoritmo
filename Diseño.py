@@ -21,6 +21,7 @@ miFrame.config(bd = 35)#para poner el borde
 miFrame.config(relief="groove")#para cambiar el borde
 mensaje = "mesajes de felicitaciones"
 miLabel = Label(miFrame, text=mensaje,fg="red",font=("Comic Sans MS",18)).place(x= 40,y = 10)#nos permite poner el texto en cualquier parte del frame
-
+cuadroTexto = Entry(raiz) 
+cuadroTexto.pack()
 raiz.mainloop() #es un metodo infinito.
 
