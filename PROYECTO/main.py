@@ -1,9 +1,12 @@
 from registro_persona import RegistroPersona
 from persona import Persona
 from base_de_datos import BaseDeDatos
+
+#funcion principal
 def main():
     registro = RegistroPersona()
 
+    # Menu principal
     while True:
         print("\nMenú:")
         print("1. Agregar persona")
@@ -13,13 +16,15 @@ def main():
         print("5. Salir")
 
         opcion = input("Seleccione una opción: ")
-
+        
         if opcion == "1":
             # Solicitar datos al usuario
             nombre = input("Nombre y apellido: ")
             edad = int(input("Edad: "))
             codigo = input("Codigo: ")
             correo = input("Correo electrónico (sin @gmail.com): ")
+            
+            
             correo = correo + "@gmail.com"
             numero = input("Número de teléfono: ")
             genero = input("Genero(F/M): ")
