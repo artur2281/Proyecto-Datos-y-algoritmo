@@ -1,10 +1,11 @@
 from registro_persona import RegistroPersona
 from persona import Persona
 from base_de_datos import BaseDeDatos
+from enviar import EnviadorDeCorreos
 
-#funcion principal
 def main():
     registro = RegistroPersona()
+    enviador_de_correos = EnviadorDeCorreos('trabajosgrupalesdelcole@gmail.com', 'eqnclstodvineoub')
 
     # Menu principal
     while True:
@@ -24,8 +25,13 @@ def main():
             codigo = input("Codigo: ")
             correo = input("Correo electrónico (sin @gmail.com): ")
             
-            
-            correo = correo + "@gmail.com"
+            op_correo = input("que tipo de correo usa? (1)gmail (2)hotmail (3)yahoo: ")
+            if op_correo == "1":
+                correo = correo + "@gmail.com"
+            if op_correo == "2":
+                correo = correo + "@hotmail.com"
+            if op_correo == "3":
+                correo = correo + "@yahoo.com" 
             numero = input("Número de teléfono: ")
             genero = input("Genero(F/M): ")
             fecha_nacimiento = input("Fecha de nacimiento(dd/mm/aaaa): ")
@@ -36,6 +42,9 @@ def main():
             # Agregar persona al registro
             registro.agregar_persona(persona)
 
+            # Enviar correo electrónico a la persona recién registrada
+            enviador_de_correos.enviar_correo(correo, "Registro exitoso", "Has sido registrado exitosamente.")
+
         elif opcion == "2":
             codigo = input("Ingrese el codigo de la persona a eliminar: ")
             registro.eliminar_persona(codigo)
@@ -45,7 +54,7 @@ def main():
 
         elif opcion == "4":
             codigo = input("Ingrese el codigo de la persona a buscar: ")
-            registro.buscar_persona(codigo)
+            registro.buscar_persona_por_codigo(codigo)
 
         elif opcion == "5":
             print("Saliendo del programa...")
