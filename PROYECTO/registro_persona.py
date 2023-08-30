@@ -2,6 +2,7 @@ from base_de_datos import BaseDeDatos
 from persona import Persona
 import openpyxl
 from openpyxl import Workbook
+from tkinter import *
 
 #clase para el registro de personas
 class RegistroPersona:
@@ -27,7 +28,7 @@ class RegistroPersona:
         sheet.append([persona.nombre, persona.codigo, persona.edad, persona.correo, persona.numero, persona.genero, persona.fecha_nacimiento])
         wb.save('personas.xlsx')
         self.personas.append(persona)
-        print("Persona agregada exitosamente.")
+        return "Persona agregada exitosamente."
 
     #funcion para eliminar una persona del registro
     def eliminar_persona(self, codigo):
@@ -41,9 +42,18 @@ class RegistroPersona:
 
     #funcion para mostrar las personas del registro
     def mostrar_personas(self):
-        for persona in self.personas:
-            print(f"Nombre: {persona.nombre}\nCodigo: {persona.codigo}\nEdad: {persona.edad}\nCorreo: {persona.correo}\nNúmero: {persona.numero}\nGénero: {persona.genero}\nFecha de Nacimiento: {persona.fecha_nacimiento}\n")
-
+        for i, persona in enumerate(self.personas):
+            detalles = (
+                f"Nombre: {persona.nombre}\n"
+                f"Código: {persona.codigo}\n"
+                f"Edad: {persona.edad}\n"
+                f"Correo: {persona.correo}\n"
+                f"Número: {persona.numero}\n"
+                f"Género: {persona.genero}\n"
+                f"Fecha de Nacimiento: {persona.fecha_nacimiento}\n"
+            )
+            label = Label(self.raiz, text=detalles)
+            label.pack()
     #funcion para buscar una persona en el registro por codigo
     def buscar_persona_por_codigo(self, codigo):
         personas_encontradas = [persona for persona in self.personas if persona.codigo == codigo]
