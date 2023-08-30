@@ -28,7 +28,7 @@ class RegistroPersona:
         sheet.append([persona.nombre, persona.codigo, persona.edad, persona.correo, persona.numero, persona.genero, persona.fecha_nacimiento])
         wb.save('personas.xlsx')
         self.personas.append(persona)
-        return "Persona agregada exitosamente."
+        print("Persona agregada exitosamente." ) 
 
     #funcion para eliminar una persona del registro
     def eliminar_persona(self, codigo):
@@ -52,8 +52,7 @@ class RegistroPersona:
                 f"Género: {persona.genero}\n"
                 f"Fecha de Nacimiento: {persona.fecha_nacimiento}\n"
             )
-            label = Label(self.raiz, text=detalles)
-            label.pack()
+            print(detalles)
     #funcion para buscar una persona en el registro por codigo
     def buscar_persona_por_codigo(self, codigo):
         personas_encontradas = [persona for persona in self.personas if persona.codigo == codigo]

@@ -4,7 +4,7 @@ from tkinter import *
 # DANDO NOMBRES DE LOS OBJETOS
 registro = RegistroPersona()
 
-# Crear objeto de la clase RegistroPersona
+#--------------------- Crear objeto de la clase RegistroPersona
 
 raiz = Tk()
 raiz.title("menu")
@@ -15,8 +15,7 @@ raiz.title("menu")
 #CREANDO LABELS Y ENTRYS..
 miFrame = Frame(width=500, height=400)
 miFrame.config(bg="red")
-
-
+miFrame.pack()
 nombre_label = Label(miFrame, text="Nombre y apellido:")
 nombre_entry = Entry(miFrame)
 edad_label = Label(miFrame, text="Edad:")
@@ -67,7 +66,9 @@ def ocultar_campos():
     correo_label.pack_forget()
     correo_entry.pack_forget()
    
-mensaje_label = None
+
+
+
 def entrar_al_boton_agregarPersona():
     eliminar_botones()
     nombre_label.pack()
@@ -84,14 +85,23 @@ def entrar_al_boton_agregarPersona():
     genero_entry.pack()
     fecha_nacimiento_label.pack()
     fecha_nacimiento_entry.pack()
+    botton_agregar_persona.pack()
 
-    miFrame.pack()
-    persona = Persona(nombre_entry.get(), codigo_entry.get(), edad_entry.get(), correo_entry.get(), numero_entry.get(), genero_entry.get(), fecha_nacimiento_entry.get())
-    registro.agregar_persona(persona)
-    mensaje = registro.agregar_persona(persona)
-    mensaje_label.config(text=mensaje)
-    mensaje_label = Label(raiz, text=" ")
-    mensaje_label.pack()
+def agregarPersona_click():
+    
+        nombre = nombre_entry.get()
+        codigo = codigo_entry.get()
+        edad = edad_entry.get()
+        correo = correo_entry.get()
+        numero = numero_entry.get()
+        genero = genero_entry.get()
+        fecha_nacimiento = fecha_nacimiento_entry.get()
+    
+        persona = Persona(nombre, codigo, edad, correo, numero, genero, fecha_nacimiento)
+        registro.agregar_persona(persona)
+        
+    
+
 
 def entrar_al_boton_mostrarPersonas():
     eliminar_botones()
@@ -122,6 +132,7 @@ buscarPersona = Button(raiz, text="Buscar persona ",command=entrar_al_boton_busc
 salir_button = Button(raiz, text="Salir", command=cerrar_ventana)
 volver_al_menu_guardarDatos = Button(raiz, text="volver al menu y guardar los datos ")
 boton_retroceder = Button(raiz, text="Retroceder", command=retroceder)
+botton_agregar_persona= Button(miFrame, text="Agregar", command=agregarPersona_click)
 boton_retroceder.pack()
 
 
