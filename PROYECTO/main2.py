@@ -8,14 +8,13 @@ registro = RegistroPersona()
 
 raiz = Tk()
 raiz.title("menu")
-
+raiz.config(background= "blue")
 
 
 
 #CREANDO LABELS Y ENTRYS..
 miFrame = Frame(width=500, height=400)
 miFrame.config(bg="red")
-miFrame.pack()
 nombre_label = Label(miFrame, text="Nombre y apellido:")
 nombre_entry = Entry(miFrame)
 edad_label = Label(miFrame, text="Edad:")
@@ -38,7 +37,7 @@ codigo = codigo_eliminar_entry.get()
 
 
 
-
+#-------------------------------------BOTON PARA MOSTRAR LOS BOTONES DE INICIO---------------------+
 
 def mostrar_botones():
     agregarPersona.pack()
@@ -47,6 +46,7 @@ def mostrar_botones():
     buscarPersona.pack()
     salir_button.pack()
 
+#----------------------------------------ELIMINAR BOTONES--------------------------------------------
 def eliminar_botones():
     agregarPersona.pack_forget()
     eliminarPersona.pack_forget()
@@ -55,7 +55,7 @@ def eliminar_botones():
     
 
    
-
+#----------------------------------------OCULTAR FICHA DE AGREGAAR PERSONAS--------------------------------------------
 def ocultar_campos():
     nombre_label.pack_forget()
     nombre_entry.pack_forget()
@@ -65,12 +65,18 @@ def ocultar_campos():
     codigo_entry.pack_forget()
     correo_label.pack_forget()
     correo_entry.pack_forget()
-   
+    numero_label.pack_forget()
+    genero_label.pack_forget()
+    fecha_nacimiento_label.pack_forget()
+    numero_entry.pack_forget()
+    genero_entry.pack_forget()
+    fecha_nacimiento_entry.pack_forget()
 
-
+#----------------------------BOTON PARA ENTRAR AL BOTON PARA AGREGAR PERSONAS-------------------------------
 
 def entrar_al_boton_agregarPersona():
     eliminar_botones()
+    miFrame.pack()
     nombre_label.pack()
     nombre_entry.pack()
     edad_label.pack()
@@ -86,7 +92,7 @@ def entrar_al_boton_agregarPersona():
     fecha_nacimiento_label.pack()
     fecha_nacimiento_entry.pack()
     botton_agregar_persona.pack()
-
+#-------------------------------------BOTON PARA AGREGAR PERSONAS---------------------------
 def agregarPersona_click():
     
         nombre = nombre_entry.get()
@@ -101,7 +107,7 @@ def agregarPersona_click():
         registro.agregar_persona(persona)
         
     
-
+#-----------------------------BOTON PARA ENTRAR AL BOTTON PARA MOSTRAR PERSONAS--------------------------------
 
 def entrar_al_boton_mostrarPersonas():
     eliminar_botones()
@@ -109,22 +115,26 @@ def entrar_al_boton_mostrarPersonas():
     for detalles in detalles_personas:
         label = Label(miFrame, text=detalles)
         label.pack()
-
+#---------------------------------BOTTON PARA ENTRAR A ELIMINAR PERSONAS ----------------------------
 def entrar_al_boton_eliminarPersonas():
     eliminar_botones()
     codigo_eliminar_label.pack()
     codigo_eliminar_entry.pack()
     registro.eliminar_persona(codigo)
-    
+#--------------------------- 
 def entrar_al_boton_buscarPersonas():
     eliminar_botones()
 
+#--------------------------------boton salir----------------------------------------------------------
 def cerrar_ventana():
    raiz.destroy()
+
+#--------------------------------boton retroceder----------------------------------------------------------
 def retroceder():
+    ocultar_campos()
     mostrar_botones()
 
-# agregando botoones 
+# -----------------------------agregando botoones -------------------------------------------------------
 agregarPersona = Button(raiz, text="Agregar Persona",command=entrar_al_boton_agregarPersona)
 eliminarPersona = Button(raiz, text="Eliminar persona",command=entrar_al_boton_eliminarPersonas)
 mostrarPersonas = Button(raiz, text= " Mostrar Personas",command= entrar_al_boton_mostrarPersonas)
@@ -137,12 +147,8 @@ boton_retroceder.pack()
 
 
 
-# FRAME PRINCIPAL
-agregarPersona.pack()
-eliminarPersona.pack()
-mostrarPersonas.pack()
-buscarPersona.pack()
-salir_button.pack()
+#-----------------------------------FRAME PRINCIPAL------------------------------------------------------
+mostrar_botones()
 
 
 
