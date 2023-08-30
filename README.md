@@ -1,2 +1,2 @@
-# Proyecto-Datos-y-algoritmo
+# Diagrama de secuencia
 Automatización de mensajes.
