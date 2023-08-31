@@ -1,4 +1,4 @@
-import openpyxl
+import openpyxl # leer y escribir datos en un archivo execel 
 from openpyxl import Workbook
 
 class BaseDeDatos:
