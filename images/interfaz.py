@@ -7,7 +7,7 @@ c_morado = "#7f5af0"
 c_verde = "#2cb67d"
 
 root = CTk()
-root.geometry('500x600+350+20')  # Corregir el tamaño (x en lugar de *)
+root.geometry('500*600+350+20')  # Corregir el tamaño (x en lugar de *)
 root.minsize(480, 500)
 root.config(bg=c_negro)
 root.title('Inicio de sesion')
