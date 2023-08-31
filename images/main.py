@@ -1,3 +1,4 @@
+#Incio de sesion
 from customtkinter import CTk, CTkFrame, CTkEntry, CTkLabel, CTkButton, CTkCheckBox
 from tkinter import PhotoImage
 
@@ -7,7 +8,7 @@ c_verde = "#2cb67d"
 
 
 root = CTk()
-root.geometry('500x600+350+20')
+root.geometry('500*600+350+20')
 root.minsize(480, 500)
 root.config(bg = c_negro)
 root.title('Inicio de sesion')
@@ -34,6 +35,11 @@ usuario.grid(columnspan = 2, row=1, padx =4, pady = 4)
 password = CTkEntry(frame, font = ('sans rerif', 12 ), placeholder_text ='Contraseña',
     border_color = c_verde, fg_color = c_negro, width = 220, height = 40)
 password.grid(columnspan = 2, row=2, padx =4, pady = 4)
+
+label_password = tk.Label(login_window, text="Password")
+label_password.grid(row=1, column=0)
+entry_password = tk.Entry(login_window, show="*")
+entry_password.grid(row=1, column=1)
 
 #Crear para guardar
 checkBox = CTkCheckBox(frame, text='Recordarme', hover_color=c_morado, 
