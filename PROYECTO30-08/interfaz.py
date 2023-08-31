@@ -4,7 +4,7 @@ from registro_persona import RegistroPersona
 from persona import Persona
 from base_de_datos import BaseDeDatos
 from enviarCorreo import EnviadorDeCorreos
-
+#----------------------FUNCION PARA INGRESAR------------------------------
 def login():
     username = entry_username.get()
     password = entry_password.get()
@@ -15,19 +15,50 @@ def login():
         show_options()
     else:
         messagebox.showerror("Error", "Incorrect username or password")
-
+#--------------------FUNCION DE OPCIONES---------------------------------------------
 def show_options():
     button_agregar.grid(row=5, column=0)
     button_eliminar.grid(row=5, column=1)
     button_mostrar.grid(row=6, column=0)
     button_buscar.grid(row=6, column=1)
-
+#---------------------BOTON RETROCEDER-------------------------------------------------
+def back():
+    clear_fields()
+    hide_options()
+    show_options()
+    hide_agregar_persona_screen()
+#----------------------OCULTAR BOTONES
 def hide_options():
     button_agregar.grid_forget()
     button_eliminar.grid_forget()
     button_mostrar.grid_forget()
     button_buscar.grid_forget()
+#-----------------ocultar FICHERO DE AGREGAR PERSONA---------------------
+def hide_agregar_persona_screen():
+    label_nombre.grid_forget()
+    entry_nombre.grid_forget()
 
+    label_edad.grid_forget()
+    entry_edad.grid_forget()
+
+    label_codigo.grid_forget()
+    entry_codigo.grid_forget()
+
+    label_correo.grid_forget()
+    entry_correo.grid_forget()
+
+    label_numero.grid_forget()
+    entry_numero.grid_forget()
+
+    label_genero.grid_forget()
+    entry_genero.grid_forget()
+
+    label_fecha_nacimiento.grid_forget()
+    entry_fecha_nacimiento.grid_forget()
+
+    button_confirmar.grid_forget()
+    button_retroceder.grid_forget()
+#----------------FICHA PARA AGREGAR personas------------
 def agregar_persona():
     hide_options()
     label_nombre.grid(row=0, column=0)
@@ -52,7 +83,9 @@ def agregar_persona():
     entry_fecha_nacimiento.grid(row=6, column=1)
 
     button_confirmar.grid(row=7, column=0, columnspan=2)
+    button_retroceder.grid(row=8,column = 0, columnspan=3)
 
+#----------------CONFIRMAR AGREGAR PERSONA-------------------------
 def confirmar_agregar_persona():
     nombre = entry_nombre.get()
     edad = int(entry_edad.get())
@@ -76,39 +109,42 @@ def confirmar_agregar_persona():
     messagebox.showinfo("Éxito", "Persona agregada exitosamente")
     clear_fields()
     show_options()
-
+#---------------------fUNCION PARA ELIMINAR PERSONA---------------------
 def eliminar_persona():
     hide_options()
     label_codigo.grid(row=0, column=0)
     entry_codigo.grid(row=0, column=1)
     button_confirmar.grid(row=1, column=0, columnspan=2)
-
+    button_retroceder.grid(row= 2, column=0, columnspan=2)
+#----------------------CONFIRMACION DE ELIMINACION DE PERSONAS----------------------------------------
 def confirmar_eliminar_persona():
     codigo = entry_codigo.get()
     registro.eliminar_persona(codigo)
     messagebox.showinfo("Éxito", "Persona eliminada exitosamente")
     clear_fields()
     show_options()
-
+#-----------------------------MOSTRAR PERSONAS---------------------
 def mostrar_personas():
     hide_options()
     personas = registro.mostrar_personas()
     messagebox.showinfo("Personas registradas", personas)
     show_options()
-
+    button_retroceder.grid_forget()
+#----------------------FUNCION PARA BUSCAR PERSONA-------------------------------------------------
 def buscar_persona():
     hide_options()
     label_codigo.grid(row=0, column=0)
     entry_codigo.grid(row=0, column=1)
     button_confirmar.grid(row=1, column=0, columnspan=2)
-
+    button_retroceder.grid(row =2, column=0, columnspan=2)
+#----------------------CONFIRMAR PARA BUSCAR PERSONA -------------------------------------------------
 def confirmar_buscar_persona():
     codigo = entry_codigo.get()
     persona = registro.buscar_persona_por_codigo(codigo)
     messagebox.showinfo("Persona encontrada", persona)
     clear_fields()
     show_options()
-
+#---------------------PARA LIMPIAR LLA PANTALLA ------------------------------------------------------------------
 def clear_fields():
     entry_nombre.delete(0, tk.END)
     entry_edad.delete(0, tk.END)
@@ -123,7 +159,7 @@ enviador_de_correos = EnviadorDeCorreos('trabajosgrupalesdelcole@gmail.com', 'eq
 
 root = tk.Tk()
 root.title("Registro de personas")
-
+#-----------------------------Entrando texto -----------------------------------------
 label_nombre = tk.Label(root, text="Nombre y apellido")
 label_edad = tk.Label(root, text="Edad")
 label_codigo = tk.Label(root, text="Código")
@@ -131,7 +167,7 @@ label_correo = tk.Label(root, text="Correo electrónico (sin @gmail.com)")
 label_numero = tk.Label(root, text="Número")
 label_genero = tk.Label(root, text="Género")
 label_fecha_nacimiento = tk.Label(root, text="Fecha de nacimiento")
-
+#----------------Cuadros para rrellenar-----------------------------------------------------
 entry_nombre = tk.Entry(root)
 entry_edad = tk.Entry(root)
 entry_codigo = tk.Entry(root)
@@ -144,11 +180,12 @@ var = tk.IntVar(value=1)
 R1 = tk.Radiobutton(root, text="gmail", variable=var, value=1)
 R2 = tk.Radiobutton(root, text="hotmail", variable=var, value=2)
 R3 = tk.Radiobutton(root, text="yahoo", variable=var, value=3)
-
+#-------------------------------Agregando botones-----------------------------------
 button_agregar = tk.Button(root, text="Agregar persona", command=agregar_persona)
 button_eliminar = tk.Button(root, text="Eliminar persona", command=eliminar_persona)
 button_mostrar = tk.Button(root, text="Mostrar personas", command=mostrar_personas)
 button_buscar = tk.Button(root, text="Buscar persona", command=buscar_persona)
+button_retroceder = tk.Button(root,text = " Retroceder ", command=back )
 
 button_confirmar = tk.Button(root, text="Confirmar", command=confirmar_agregar_persona)
 
@@ -156,7 +193,7 @@ root.withdraw()
 
 login_window = tk.Tk()
 login_window.title("Login")
-
+#_---------login--------------------------------------------
 label_username = tk.Label(login_window, text="Username")
 label_username.grid(row=0, column=0)
 entry_username = tk.Entry(login_window)
