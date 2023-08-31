@@ -1,3 +1,4 @@
+#Incio de sesion
 from customtkinter import CTk, CTkFrame, CTkEntry, CTkLabel, CTkButton, CTkCheckBox
 from tkinter import PhotoImage
 
@@ -7,7 +8,7 @@ c_verde = "#2cb67d"
 
 
 root = CTk()
-root.geometry('500x600+350+20')
+root.geometry('500*600+350+20')
 root.minsize(480, 500)
 root.config(bg = c_negro)
 root.title('Inicio de sesion')
