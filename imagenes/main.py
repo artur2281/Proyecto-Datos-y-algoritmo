@@ -36,10 +36,7 @@ password = CTkEntry(frame, font = ('sans rerif', 12 ), placeholder_text ='Contra
     border_color = c_verde, fg_color = c_negro, width = 220, height = 40)
 password.grid(columnspan = 2, row=2, padx =4, pady = 4)
 
-label_password = tk.Label(login_window, text="Password")
-label_password.grid(row=1, column=0)
-entry_password = tk.Entry(login_window, show="*")
-entry_password.grid(row=1, column=1)
+
 
 #Crear para guardar
 checkBox = CTkCheckBox(frame, text='Recordarme', hover_color=c_morado, 

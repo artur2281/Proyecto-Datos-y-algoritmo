@@ -4,9 +4,9 @@ import time
 
 # Define los usuarios y contraseñas válidos en un diccionario
 usuarios = {
-    "ELIA": "111",
-    "TEVIS": "222",
-    "ABIGAIL": "333"
+    "Elia": "111",
+    "Tevis": "222",
+    "Abigail": "333"
 }
 
 # Función para verificar la autenticación
