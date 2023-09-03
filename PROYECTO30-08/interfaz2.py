@@ -15,8 +15,9 @@ def iniciar_sesion():
     contrasena_ingresada = entry_contrasena.get()
 
     resultado_label.configure(text="Iniciando sesión...")  # Muestra un mensaje de carga
+    root.update() #Actualiza la interfaz
 
-    # Simula un tiempo de carga
+    #Tiempo de carga
     root.update() 
     time.sleep(3)
 

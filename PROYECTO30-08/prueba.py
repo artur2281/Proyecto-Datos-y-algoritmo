@@ -54,7 +54,6 @@ def eliminar_botones():
     buscarPersona.pack_forget()
     
 
-   
 #----------------------------------------OCULTAR FICHA DE AGREGAAR PERSONAS--------------------------------------------
 def ocultar_campos():
     nombre_label.pack_forget()
@@ -127,7 +126,7 @@ def entrar_al_boton_buscarPersonas():
 
 #--------------------------------boton salir----------------------------------------------------------
 def cerrar_ventana():
-   raiz.destroy()
+    raiz.destroy()
 
 #--------------------------------boton retroceder----------------------------------------------------------
 def retroceder():
