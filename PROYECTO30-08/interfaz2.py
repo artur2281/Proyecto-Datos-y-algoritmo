@@ -49,7 +49,7 @@ frame.rowconfigure([0, 1, 2, 3, 4, 5], weight=1)
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
 
-# usamos CTkLabel
+# usamos CTkLabel para la imagen
 CTkLabel(frame, image=logo).grid(columnspan=2, row=0)
 
 # Para las ventanas de usuario y contraseña
@@ -57,7 +57,7 @@ entry_usuario = CTkEntry(frame, font=('sans serif', 12), placeholder_text='Usuar
     border_color=c_verde, fg_color=c_negro, width=220, height=40)
 entry_usuario.grid(columnspan=2, row=1, padx=4, pady=4)
 
-# Usar show='*' para ocultar la contraseña con asteriscos
+# Usamos * para ocultar la contraseña con asteriscos
 entry_contrasena = CTkEntry(frame, font=('sans serif', 12), placeholder_text='Contraseña',
     border_color=c_verde, fg_color=c_negro, width=220, height=40, show='*')
 entry_contrasena.grid(columnspan=2, row=2, padx=4, pady=4)
