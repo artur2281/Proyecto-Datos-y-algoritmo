@@ -1,12 +1,8 @@
-from tkinter import messagebox
-from registro_persona import RegistroPersona
-from persona import Persona
-from base_de_datos import BaseDeDatos
-from enviarCorreo import EnviadorDeCorreos
 from customtkinter import CTk, CTkFrame, CTkEntry, CTkLabel, CTkButton
 from tkinter import PhotoImage
 import time
 import tkinter as tk
+
 
 #----------------------FUNCION PARA INGRESAR------------------------------
 
