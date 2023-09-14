@@ -22,6 +22,7 @@ def iniciar_sesion():
     root.update() # Actualiza la interfaz
 
     # Simula un tiempo de carga
+    root.update
     time.sleep(2)
 
     if usuario_ingresado in usuarios and contrasena_ingresada == usuarios[usuario_ingresado]:
