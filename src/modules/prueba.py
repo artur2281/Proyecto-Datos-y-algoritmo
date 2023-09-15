@@ -1,5 +1,5 @@
-from registro_persona import *
-from persona import *
+from registro_persona import RegistroPersona
+from persona import Persona
 from tkinter import *
 # DANDO NOMBRES DE LOS OBJETOS
 registro = RegistroPersona()
