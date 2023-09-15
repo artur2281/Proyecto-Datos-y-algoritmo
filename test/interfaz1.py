@@ -1,9 +1,9 @@
 import tkinter as tk
 from tkinter import messagebox
-from registro_persona import RegistroPersona
-from persona import Persona
-from base_de_datos import BaseDeDatos
-from enviarCorreo import EnviadorDeCorreos
+from src.modules.registro_persona import RegistroPersona
+from src.modules.persona import Persona
+from src.modules.base_de_datos import BaseDeDatos
+from src.modules.enviarCorreo import EnviadorDeCorreos
 from customtkinter import CTk, CTkFrame, CTkEntry, CTkLabel, CTkButton
 from tkinter import PhotoImage
 import time

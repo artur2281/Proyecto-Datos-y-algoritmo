@@ -38,7 +38,7 @@ root.config(bg=c_negro)
 root.title('Inicio de sesion')
 
 #Ruta de la imagen
-logo = PhotoImage(file='images/logo.png')
+logo = PhotoImage(file='../images/logo.png')
 
 frame = CTkFrame(root, fg_color=c_negro)
 frame.grid(column=0, row=0, sticky='nsew', padx=50, pady=50)

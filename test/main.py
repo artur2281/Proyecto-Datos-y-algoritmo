@@ -1,7 +1,10 @@
-from registro_persona import RegistroPersona
-from persona import Persona
-from base_de_datos import BaseDeDatos
-from enviarCorreo import EnviadorDeCorreos
+import sys
+sys.path.append('.../')
+
+from src.modules.registro_persona import RegistroPersona
+from src.modules.persona import Persona
+from src.modules.base_de_datos import BaseDeDatos
+from src.modules.enviarCorreo import EnviadorDeCorreos
 
 def main():
     registro = RegistroPersona()
