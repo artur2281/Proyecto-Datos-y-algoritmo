@@ -13,7 +13,7 @@ options = Options()
 
 options = webdriver.ChromeOptions()
 #options.add_argument("--user-data-dir=./driver/data3")
-options.add_argument('--headless')
+#options.add_argument('--headless')
 options.add_argument("--user-data-dir=C:\\Users\\USER\\AppData\\Local\\Google\\Chrome SxS\\User Data")
 options.add_argument("--profile-directory=Default")
 driver = webdriver.Chrome(options=options) 
@@ -68,7 +68,7 @@ def enviarMensaje(numero_telefono,nombre):
     wait.until(EC.presence_of_element_located((By.TAG_NAME, 'footer')))
 
 
-    mensaje = " Felicidades"
+    mensaje = f" Felicidades {nombre} esperamos que tengas un exelente dia"
 
     #get in footer
 

@@ -22,10 +22,11 @@ class WhatsAppBot:
             nombre = recipient['nombre']
             ruta = "G:\Proyecto final\Proyecto-Datos-y-algoritmo\images\logo.png"
             botWhatsapp(phone,ruta,nombre)
+            time.sleep(2)
 
 
 # Crear una instancia de la clase WhatsAppBot
-
-bot = WhatsAppBot()
+archivo="G:\Proyecto final\Proyecto-Datos-y-algoritmo\src\personas.xlsx"
+bot = WhatsAppBot(archivo)
 # Enviar mensajes a los destinatarios
 bot.enviar_mensajes()
