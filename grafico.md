@@ -20,7 +20,13 @@
         G-->main
         G-->prueba_de_interfaz
        
-       F-->base_de_datos.py-->enviarCorreos.py-->enviarCorreo.py-->persona.py-->prueba.py-->registro_perosna.py-->whatsapp.py
+       F-->base_de_datos.py
+       F-->enviarCorreos.py
+       F-->enviarCorreo.py
+       F-->persona.py
+       F-->prueba.py
+       F-->registro_perosna.py
+       F-->whatsapp.py
        
     
 ```
