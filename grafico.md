@@ -13,12 +13,12 @@
         B-->E(logo.png)
         C-->F(modules)
 
-        A-->G(test)
-        G-->interfaz.py
-        G-->interfaz2.py
-        G-->interfaz1.py
-        G-->main
-        G-->prueba_de_interfaz
+        
+        C-->interfaz.py
+        C-->interfaz2.py
+        C-->interfaz1.py
+        C-->main
+        C-->prueba_de_interfaz
        
        F-->base_de_datos.py
        F-->enviarCorreos.py
