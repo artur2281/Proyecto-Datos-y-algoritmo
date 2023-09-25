@@ -1,14 +1,24 @@
-from PyQt5 import QtWidgets, uic
-from PyQt5.QtCore import QUrl
+from PyQt5 import QtWidgets
+from PyQt5.QtCore import QUrl, QPropertyAnimation, QEasingCurve
+from PyQt5 import QtCore
 from PyQt5.QtGui import QDesktopServices
+from PyQt5.uic import loadUi
 from registro_persona import RegistroPersona
 #iniciar la apli
+class VentanaPrincipal():
+    def __init__(self):
+        super(VentanaPrincipal,self).__init__()
+        login =loadUi("G:\Proyecto final\Proyecto-Datos-y-algoritmo\images\diseñofeliciaciones\login.ui",self)
+        menu =loadUi("G:\Proyecto final\Proyecto-Datos-y-algoritmo\images\diseñofeliciaciones\menu.ui",self)
+        
+        self.registro_persona = RegistroPersona()
+    
+      
 
+    
 app = QtWidgets.QApplication([])
 #Cargar archivos
 
-login = uic.loadUi("G:\Proyecto final\Proyecto-Datos-y-algoritmo\images\diseñofeliciaciones\login.ui")
-menu = uic.loadUi("G:\Proyecto final\Proyecto-Datos-y-algoritmo\images\diseñofeliciaciones\menu.ui")
 
 # En el manejador de eventos del botón (por ejemplo, dentro de una función)
 def facebook_url():

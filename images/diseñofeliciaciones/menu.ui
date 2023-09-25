@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>767</width>
-    <height>514</height>
+    <height>508</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -34,7 +34,8 @@ background-color: rgb(0, 0, 0);
 }
 
 QPushButton{
-background-color: #000000ff;
+background-color: rgb(113, 41, 90);
+color: rgb(67, 42, 255);
 border -radius:20px;
 }
 
@@ -63,7 +64,7 @@ border -radius:20px;
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>../../../../../Pictures/Captura de pantalla 2023-09-24 115852.png</normaloff>../../../../../Pictures/Captura de pantalla 2023-09-24 115852.png</iconset>
+             <normaloff>menu.png</normaloff>menu.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -99,7 +100,7 @@ border -radius:20px;
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>../../../../../Pictures/3.png</normaloff>../../../../../Pictures/3.png</iconset>
+             <normaloff>minimizar-signo.png</normaloff>minimizar-signo.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -122,7 +123,7 @@ border -radius:20px;
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>../../../../../Pictures/2.png</normaloff>../../../../../Pictures/2.png</iconset>
+             <normaloff>expandir.png</normaloff>expandir.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -145,7 +146,7 @@ border -radius:20px;
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>../../../../../Pictures/1.png</normaloff>../../../../../Pictures/1.png</iconset>
+             <normaloff>escalable.png</normaloff>escalable.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -163,12 +164,15 @@ border -radius:20px;
              <height>40</height>
             </size>
            </property>
+           <property name="styleSheet">
+            <string notr="true">color: rgb(161, 9, 191);</string>
+           </property>
            <property name="text">
             <string/>
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>../../../../../Pictures/4.png</normaloff>../../../../../Pictures/4.png</iconset>
+             <normaloff>cerrar.png</normaloff>cerrar.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -210,6 +214,8 @@ border -radius:20px;
                                 stop:0 #55A3D9, stop:1 #FF4D8E);
 }
 
+
+
 QPushButton {
     background-color: #ADD8E6; /* Cambiamos el color a rosa */
     border-top-left-radius: 20px;
@@ -219,15 +225,30 @@ QPushButton {
     transition: background-color 0.3s, color 0.3s;
 }
 
-QPushButton: hover {
-    background-color: white; /* Cambia a blanco cuando el mouse está encima */
+
+QPushButton#pushButton_BASEDEDATOS:hover,
+QPushButton#pushButton_REGISTRAR:hover,
+QPushButton#pushButton_ELIMINAR:hover,
+QPushButton#pushButton_BUSCAR:hover,
+QPushButton#pushButton_ACTUALIZAR:hover {
+    background-color: rgb(255, 182, 193);
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
-    color: rgb(0, 0, 0);
+   
+	color: rgb(255, 255, 255);
     font: 77 10pt &quot;Arial Black&quot;;
 }
 
 
+QPushButton#pushButton_BASEDEDATOS: pressed,
+QPushButton#pushButton_REGISTRAR: pressed,
+QPushButton#pushButton_ELIMINAR: pressed,
+QPushButton#pushButton_BUSCAR: pressed,
+QPushButton#pushButton_ACTUALIZAR:pressed {
+    padding-left: 5px;
+    padding-top: 5px;
+	 background-color:rgb(51, 64, 255)
+}
 </string>
            </property>
            <property name="frameShape">
@@ -245,12 +266,15 @@ QPushButton: hover {
                 <height>40</height>
                </size>
               </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
               <property name="text">
                <string>BASE DE DATOS</string>
               </property>
               <property name="icon">
                <iconset>
-                <normaloff>../../../../../Pictures/Menu/Iconos/Iconos (1).png</normaloff>../../../../../Pictures/Menu/Iconos/Iconos (1).png</iconset>
+                <normaloff>base de datos.jpj.jpg</normaloff>base de datos.jpj.jpg</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -273,7 +297,7 @@ QPushButton: hover {
               </property>
               <property name="icon">
                <iconset>
-                <normaloff>../../../../../Pictures/Menu/Iconos/5.png</normaloff>../../../../../Pictures/Menu/Iconos/5.png</iconset>
+                <normaloff>registrar.png.jpg</normaloff>registrar.png.jpg</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -296,7 +320,7 @@ QPushButton: hover {
               </property>
               <property name="icon">
                <iconset>
-                <normaloff>../../../../../Pictures/Menu/Iconos/3.png</normaloff>../../../../../Pictures/Menu/Iconos/3.png</iconset>
+                <normaloff>actualizar.jpg</normaloff>actualizar.jpg</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -319,7 +343,7 @@ QPushButton: hover {
               </property>
               <property name="icon">
                <iconset>
-                <normaloff>../../../../../Pictures/Menu/Iconos/2.png</normaloff>../../../../../Pictures/Menu/Iconos/2.png</iconset>
+                <normaloff>buscar.jpg</normaloff>buscar.jpg</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -342,7 +366,7 @@ QPushButton: hover {
               </property>
               <property name="icon">
                <iconset>
-                <normaloff>../../../../../Pictures/Menu/Iconos/1.png</normaloff>../../../../../Pictures/Menu/Iconos/1.png</iconset>
+                <normaloff>eliminar.jpg</normaloff>eliminar.jpg</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -416,7 +440,7 @@ font: 77 10pt &quot;Arial Black&quot;;
             <item>
              <widget class="QStackedWidget" name="stackedWidget">
               <property name="currentIndex">
-               <number>2</number>
+               <number>1</number>
               </property>
               <widget class="QWidget" name="pageDATOS">
                <layout class="QVBoxLayout" name="verticalLayout_5">

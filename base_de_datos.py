@@ -1,6 +1,8 @@
 import openpyxl
 from openpyxl import Workbook
 
+
+
 class BaseDeDatos:
     def __init__(self, archivo):
         self.archivo = archivo
