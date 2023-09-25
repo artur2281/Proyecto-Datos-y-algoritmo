@@ -11,12 +11,20 @@ login = uic.loadUi("G:\Proyecto final\Proyecto-Datos-y-algoritmo\images\diseñof
 menu = uic.loadUi("G:\Proyecto final\Proyecto-Datos-y-algoritmo\images\diseñofeliciaciones\menu.ui")
 
 # En el manejador de eventos del botón (por ejemplo, dentro de una función)
-def abrir_url():
+def facebook_url():
     url = QUrl("https://www.facebook.com/vendoabus")  # Cambia la URL por la que desees abrir
     QDesktopServices.openUrl(url)
-
+def twiter_url():
+    url = QUrl("https://twitter.com/bi_bgl")  # Cambia la URL por la que desees abrir
+    QDesktopServices.openUrl(url)
+def instagram_url():
+    url = QUrl("https://www.instagram.com/abigail_bgl/")  # Cambia la URL por la que desees abrir
+    QDesktopServices.openUrl(url)
 # Conecta el botón a la función que abrirá la URL
-login.pushButton_5.clicked.connect(abrir_url)
+login.pushButton_5.clicked.connect(facebook_url)
+login.pushButton_2.clicked.connect(twiter_url)
+login.pushButton_3.clicked.connect(facebook_url)
+login.pushButton_4.clicked.connect(instagram_url)
 
 
 # Función para mostrar la ventana del menú
