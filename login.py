@@ -12,7 +12,7 @@ menu = uic.loadUi("G:\Proyecto final\Proyecto-Datos-y-algoritmo\images\diseñofe
 
 # En el manejador de eventos del botón (por ejemplo, dentro de una función)
 def abrir_url():
-    url = QUrl("")  # Cambia la URL por la que desees abrir
+    url = QUrl("https://www.facebook.com/vendoabus")  # Cambia la URL por la que desees abrir
     QDesktopServices.openUrl(url)
 
 # Conecta el botón a la función que abrirá la URL
