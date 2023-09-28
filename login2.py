@@ -1,110 +1,90 @@
-from PyQt5 import QtWidgets
-from PyQt5.QtCore import QUrl, QPropertyAnimation, QEasingCurve
+# @autor: Magno Efren
+# Youtube: https://www.youtube.com/c/MagnoEfren
+import sys
+from menu import *
 from PyQt5 import QtCore
-from PyQt5.QtGui import QDesktopServices
-from PyQt5.uic import loadUi
-from registro_persona import RegistroPersona
-#iniciar la apli
-class VentanaPrincipal():
-    def __init__(self):
-        super(VentanaPrincipal,self).__init__()
-        login =loadUi("G:\Proyecto final\Proyecto-Datos-y-algoritmo\images\diseñofeliciaciones\login.ui",self)
-        menu =loadUi("G:\Proyecto final\Proyecto-Datos-y-algoritmo\images\diseñofeliciaciones\menu.ui",self)
-        
-        self.registro_persona = RegistroPersona()
-    
-      
+from PyQt5.QtCore import QPropertyAnimation
+from PyQt5 import QtCore, QtGui, QtWidgets
+class MiApp(QtWidgets.QMainWindow):
+	def __init__(self):
+		super().__init__()
+		self.ui = Ui_MainWindow() 
+		self.ui.setupUi(self)
+		#eliminar barra y de titulo - opacidad
+		self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
+		self.setWindowOpacity(1)
+		#SizeGrip
+		self.gripSize = 10
+		self.grip = QtWidgets.QSizeGrip(self)
+		self.grip.resize(self.gripSize, self.gripSize)
+		# mover ventana
+		self.ui.frame_superior.mouseMoveEvent = self.mover_ventana
+		#acceder a las paginas
+		self.ui.bt_inicio.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page))			
+		self.ui.bt_uno.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_uno))
+		self.ui.bt_dos.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_dos))	
+		self.ui.bt_tres.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_tres))
+		self.ui.bt_cuatro.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_cuatro))			
+		self.ui.bt_cinco.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_cinco))	
 
-    
-app = QtWidgets.QApplication([])
-#Cargar archivos
+		#control barra de titulos
+		self.ui.bt_minimizar.clicked.connect(self.control_bt_minimizar)		
+		self.ui.bt_restaurar.clicked.connect(self.control_bt_normal)
+		self.ui.bt_maximizar.clicked.connect(self.control_bt_maximizar)
+		self.ui.bt_cerrar.clicked.connect(lambda: self.close())
 
+		self.ui.bt_restaurar.hide()
 
-# En el manejador de eventos del botón (por ejemplo, dentro de una función)
-def facebook_url():
-    url = QUrl("https://www.facebook.com/vendoabus")  # Cambia la URL por la que desees abrir
-    QDesktopServices.openUrl(url)
-def twiter_url():
-    url = QUrl("https://twitter.com/bi_bgl")  # Cambia la URL por la que desees abrir
-    QDesktopServices.openUrl(url)
-def instagram_url():
-    url = QUrl("https://www.instagram.com/abigail_bgl/")  # Cambia la URL por la que desees abrir
-    QDesktopServices.openUrl(url)
-# Conecta el botón a la función que abrirá la URL
-login.pushButton_5.clicked.connect(facebook_url)
-login.pushButton_2.clicked.connect(twiter_url)
-login.pushButton_3.clicked.connect(facebook_url)
-login.pushButton_4.clicked.connect(instagram_url)
+		#menu lateral
+		self.ui.bt_menu.clicked.connect(self.mover_menu)
 
+	def control_bt_minimizar(self):
+		self.showMinimized()		
 
-# Función para mostrar la ventana del menú
-def gui_menu():
-    login.hide()  # Oculta la ventana de inicio de sesión
-    menu.show()   # Muestra la ventana del menú
+	def  control_bt_normal(self): 
+		self.showNormal()		
+		self.ui.bt_restaurar.hide()
+		self.ui.bt_maximizar.show()
 
-# Función para manejar el inicio de sesión
-def gui_login():
-    name = login.lineEdit.text()
-    password = login.lineEdit_2.text()
+	def  control_bt_maximizar(self): 
+		self.showMaximized()
+		self.ui.bt_maximizar.hide()
+		self.ui.bt_restaurar.show()
 
-    if len(name) == 0 or len(password) == 0:
-        print("Ingresa los datos")
-    elif name == "abi" and password == "1234":
-        gui_menu()  # Mostrar el menú si las credenciales son correctas
-    else:
-        print("Credenciales incorrectas")  # Manejar credenciales incorrectas aquí
+	def mover_menu(self):
+		if True:			
+			width = self.ui.frame_lateral.width()
+			normal = 0
+			if width==0:
+				extender = 200
+			else:
+				extender = normal
+			self.animacion = QPropertyAnimation(self.ui.frame_lateral, b'minimumWidth')
+			self.animacion.setDuration(300)
+			self.animacion.setStartValue(width)
+			self.animacion.setEndValue(extender)
+			self.animacion.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
+			self.animacion.start()
+	## SizeGrip
+	def resizeEvent(self, event):
+		rect = self.rect()
+		self.grip.move(rect.right() - self.gripSize, rect.bottom() - self.gripSize)
+	## mover ventana
+	def mousePressEvent(self, event):
+		self.clickPosition = event.globalPos()
+	def mover_ventana(self, event):
+		if self.isMaximized() == False:			
+			if event.buttons() == QtCore.Qt.LeftButton:
+				self.move(self.pos() + event.globalPos() - self.clickPosition)
+				self.clickPosition = event.globalPos()
+				event.accept()
 
-
-def registrar_persona():
-    
-    nombre = menu.lineEdit.text()
-    codigo = menu.lineEdit_2.text()
-    edad = menu.lineEdit_3.text()
-    correo = menu.lineEdit_4.text()
-    numero = menu.lineEdit_5.text()
-    genero = menu.lineEdit_6.text()
-    fecha_nacimiento = menu.lineEdit_7.text()
-    if len(nombre)==0 or len(codigo)==0 or len(edad)== 0 or len(correo) == 0 or len(numero)== 0 or len(genero)==0 or len(fecha_nacimiento)==0 :
-        print("ingrese los datos")   
-    else:
-        rg = RegistroPersona()
-        rg.agregar_persona(nombre, codigo, edad, correo, numero, genero, fecha_nacimiento)
-        menu.label_10.setText("Persona registrada correctamente")
-        print("ingrese los datos")
-
-def acceder_registrarPesona():
-    menu.page_1registrar.show()
-def acceder_buscarPersona():
-    menu.page_buscar.show()
-def buscar_perosna():
-    if menu.pushButton_7buscar.isChecked():
-        # Mostrar la ventana Page1Registrar
-
-        menu.page_2buscar.show()
-        nombre = menu.lineEdit_8.text()
-        codigo = menu.lineEdit_9.text()
-        edad = menu.lineEdit_10.text()
-        correo = menu.lineEdit_11.text()
-        numero = menu.lineEdit_12.text()
-        genero = menu.lineEdit_13.text()
-        fecha_nacimiento = menu.lineEdit_14.text()
-
-        rg = RegistroPersona()
-        rg.buscar_persona(nombre, codigo, edad, correo, numero, genero, fecha_nacimiento)
-        print("persona registradacorectamente")
-
-# Conectar el botón de inicio de sesión a la función gui_login
-login.pushButton.clicked.connect(gui_login)
-
-#botones del menu
-menu.pushButton_REGISTRAR.clicked.connect(acceder_registrarPesona)
-menu.pushButton_BUSCAR.clicked.connect(acceder_buscarPersona)
-
-#botones de registrar
-menu.pushButton_6registrar.clicked.connect(registrar_persona)
-
-# Ejecutar la aplicación
-login.show()
-app.exec_()
-
-
+		if event.globalPos().y() <=20:
+			self.showMaximized()
+		else:
+			self.showNormal()
+if __name__ == "__main__":
+     app = QtWidgets.QApplication(sys.argv)
+     mi_app = MiApp()
+     mi_app.show()
+     sys.exit(app.exec_())	

@@ -1,9 +1,13 @@
 from PyQt5 import QtWidgets, uic
-from PyQt5.QtCore import QUrl
+from PyQt5.QtCore import QUrl, QPropertyAnimation, QEasingCurve
+from PyQt5 import QtCore
 from PyQt5.QtGui import QDesktopServices
 from registro_persona import RegistroPersona
 #iniciar la apli
-
+class VentanaPrincipal():
+    def __init__(self):
+        super(VentanaPrincipal,self).__init__()
+        uic.loadUi()
 app = QtWidgets.QApplication([])
 #Cargar archivos
 
