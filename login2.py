@@ -1,5 +1,4 @@
 import sys
-import typing
 
 from PyQt5.QtWidgets import QWidget
 from menu import *
@@ -18,7 +17,8 @@ class Login(QtWidgets.QMainWindow):
 		super().__init__()
 		self.ui_login = Ui_Form()  # Crear una instancia de la interfaz de usuario de login
 		self.ui_login.setupUi(self)  # Configurar la interfaz de usuario
-	
+		
+		
 		# Conecta el botón a la función que abrirá la URL
 		self.ui_login.pushButton_5.clicked.connect(self.facebook_url)
 		self.ui_login.pushButton_2.clicked.connect(self.twiter_url)
@@ -37,6 +37,7 @@ class Login(QtWidgets.QMainWindow):
 	def instagram_url(self):
 		url = QUrl("https://www.instagram.com/abigail_bgl/")  # Cambia la URL por la que desees abrir
 		QDesktopServices.openUrl(url)
+	
 
 	# Función para manejar el inicio de sesión
 	def gui_login(self):
@@ -46,8 +47,10 @@ class Login(QtWidgets.QMainWindow):
 		if len(name) == 0 or len(password) == 0:
 			print("Ingresa los datos")
 		elif name == "abi" and password == "1234":
-			self.inicio_sesion_exitoso.emit() 
-	
+			return  True
+		else:
+			print("Credenciales incorrectas")
+			return False  # Devuelve False si las credenciales son incorrectas
 
 
 class MiApp(QtWidgets.QMainWindow):
@@ -133,12 +136,6 @@ class MiApp(QtWidgets.QMainWindow):
 			self.showNormal()
 
 
-def aceder_menu():
-		login = Login()
-		login.hide()  # Ocultar la ventana de inicio de sesión
-		mi_app = MiApp()  # Crear una instancia de la ventana del menú
-		mi_app.show()  # Mostrar la ventana del menú
-
 
 
 if __name__ == "__main__":
@@ -147,18 +144,13 @@ if __name__ == "__main__":
     # Crear una instancia de la ventana de inicio de sesión
     login = Login()
     login.show()
+	
+	app.exec_()
 
-    # Crear una instancia de la ventana de MiApp
-    mi_app = MiApp()
-    mi_app.hide()  # Ocultar la ventana de MiApp al principio
-
-	def abrir_mi_app():
-        mi_app = MiApp()  # Crear una instancia de MiApp
-        mi_app.show()  # Mostrar la ventana de MiApp
-
-    # Conectar la señal inicio_sesion_exitoso de la ventana de inicio de sesión
-    # para mostrar/ocultar la ventana de MiApp después del inicio de sesión exitoso
-   # Mostrar MiApp al iniciar sesión
-    login.inicio_sesion_exitoso.connect(abrir_mi_app())  # Ocultar la ventana de inicio de sesión al iniciar sesión
-
+	# Conectar la señal de inicio de sesión exitoso a la función que abrirá el menú
+    if login.gui_login() is True:
+        login.hide()
+        """ mi_app = MiApp()
+        mi_app.show() """
+    
     sys.exit(app.exec_())
