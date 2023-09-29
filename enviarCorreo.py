@@ -4,7 +4,8 @@ import smtplib
 from base_de_datos import BaseDeDatos
 from datetime import datetime
 import time
-
+import random
+import string
 class EnviadorDeCorreos:
     def __init__(self, email_emisor, email_contrasena):
         self.email_emisor = email_emisor
@@ -22,6 +23,23 @@ class EnviadorDeCorreos:
             smtp.login(self.email_emisor, self.email_contrasena)
             smtp.sendmail(self.email_emisor, email_receptor, em.as_string())
 
+    def generar_codigo_verificacion(self, longitud=6):
+        """Genera un código de verificación aleatorio."""
+        return ''.join(random.choice(string.digits) for _ in range(longitud))
+
+    def verificar_correo(self, email_receptor):
+        """Envía un código de verificación al correo del receptor y espera su confirmación."""
+        codigo_verificacion = self.generar_codigo_verificacion()
+        print(f"Enviando correo a {email_receptor} ")
+        try:
+            self.enviar_correo(email_receptor, "Código de verificación", f"Tu código de verificación es {codigo_verificacion}")
+        except Exception as e:
+            print(f"Error al enviar correo: {e}")
+            return False
+        codigo_usuario = input("Introduce el código de verificación que has recibido en tu correo: ")
+        return codigo_verificacion == codigo_usuario
+
+    
     def programar_correo(self):
         db = BaseDeDatos('personas.xlsx')
         while True:

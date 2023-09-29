@@ -1,5 +1,3 @@
-# @autor: Magno Efren
-# Youtube: https://www.youtube.com/c/MagnoEfren
 import sys
 from menu import *
 from PyQt5 import QtCore
@@ -20,23 +18,23 @@ class MiApp(QtWidgets.QMainWindow):
 		# mover ventana
 		self.ui.frame_superior.mouseMoveEvent = self.mover_ventana
 		#acceder a las paginas
-		self.ui.bt_inicio.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page))			
-		self.ui.bt_uno.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_uno))
-		self.ui.bt_dos.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_dos))	
-		self.ui.bt_tres.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_tres))
-		self.ui.bt_cuatro.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_cuatro))			
-		self.ui.bt_cinco.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_cinco))	
+		self.ui.pushButton_REGISTRAR.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_1registrar))
+		self.ui.pushButton_BASEDEDATOS.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.pageDATOS))	
+		self.ui.pushButton_ACTUALIZAR.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_actualizar))
+		self.ui.pushButton_BUSCAR.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_buscar))			
+		self.ui.pushButton_ELIMINAR.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_eliminar))	
 
 		#control barra de titulos
 		self.ui.bt_minimizar.clicked.connect(self.control_bt_minimizar)		
 		self.ui.bt_restaurar.clicked.connect(self.control_bt_normal)
 		self.ui.bt_maximizar.clicked.connect(self.control_bt_maximizar)
-		self.ui.bt_cerrar.clicked.connect(lambda: self.close())
+		self.ui.pushButton.clicked.connect(lambda: self.close())
 
 		self.ui.bt_restaurar.hide()
 
 		#menu lateral
 		self.ui.bt_menu.clicked.connect(self.mover_menu)
+		
 
 	def control_bt_minimizar(self):
 		self.showMinimized()		
@@ -53,13 +51,13 @@ class MiApp(QtWidgets.QMainWindow):
 
 	def mover_menu(self):
 		if True:			
-			width = self.ui.frame_lateral.width()
+			width = self.ui.frameLateral.width()
 			normal = 0
 			if width==0:
 				extender = 200
 			else:
 				extender = normal
-			self.animacion = QPropertyAnimation(self.ui.frame_lateral, b'minimumWidth')
+			self.animacion = QPropertyAnimation(self.ui.frameLateral, b'minimumWidth')
 			self.animacion.setDuration(300)
 			self.animacion.setStartValue(width)
 			self.animacion.setEndValue(extender)
