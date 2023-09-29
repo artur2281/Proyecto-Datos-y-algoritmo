@@ -25,7 +25,7 @@ class Login(QtWidgets.QMainWindow):
 		self.ui_login.pushButton_3.clicked.connect(self.facebook_url)
 		self.ui_login.pushButton_4.clicked.connect(self.instagram_url)
 		# Conecta el botón de inicio de sesión a la función que manejará el inicio de sesión
-		self.ui_login.pushButton.clicked.connect(self.gui_login)
+		self.login= self.ui_login.pushButton.clicked.connect(self.gui_login)
 
 	#botones del menu
 	def facebook_url(self):
@@ -47,11 +47,17 @@ class Login(QtWidgets.QMainWindow):
 		if len(name) == 0 or len(password) == 0:
 			print("Ingresa los datos")
 		elif name == "abi" and password == "1234":
+			print("Credenciales correctas")
+			self.hide()
+			mi_app = MiApp()
+			mi_app.show()
+			
 			return  True
 		else:
 			print("Credenciales incorrectas")
-			return False  # Devuelve False si las credenciales son incorrectas
-
+			
+        
+		return False
 
 class MiApp(QtWidgets.QMainWindow):
 	def __init__(self):
@@ -60,8 +66,7 @@ class MiApp(QtWidgets.QMainWindow):
 		
 
 		self.ui.setupUi(self)
-		 #incializamos las ventanas
-		self.ui_login.setupUi(self)
+		
 		#eliminar barra y de titulo - opacidad
 		self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
 		self.setWindowOpacity(1)
@@ -138,21 +143,31 @@ class MiApp(QtWidgets.QMainWindow):
 
 
 
+
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
 
-    # Create an instance of the login window
+    # Crear una instancia de la ventana de inicio de sesión
     login = Login()
     login.show()
-	
-	login.hide()
-    # Start the application event loop
-    app.exec_()
+    mi_app = MiApp()
+    
 
-    # After the event loop exits, check the result of the login
-    if login.gui_login() is True:
-        login.hide()
-        mi_app = MiApp()
-        mi_app.show()
+    # Iniciar el bucle de eventos de la aplicación
+    """ while login.login:
+        # Procesar eventos
+        app.processEvents()
+
+        # Verificar si el usuario ha iniciado sesión
+        
+        if login.gui_login() is True:
+            # Ocultar la ventana de inicio de sesión
+            login.hide()
+            # Mostrar la ventana de la aplicación principal
+            mi_app.show()
+            break
+
+        # Comprobar si el usuario ha cerrado la aplicación
+        """
 
     sys.exit(app.exec_())
