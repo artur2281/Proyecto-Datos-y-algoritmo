@@ -141,16 +141,18 @@ class MiApp(QtWidgets.QMainWindow):
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
 
-    # Crear una instancia de la ventana de inicio de sesión
+    # Create an instance of the login window
     login = Login()
     login.show()
 	
-	app.exec_()
+	login.hide()
+    # Start the application event loop
+    app.exec_()
 
-	# Conectar la señal de inicio de sesión exitoso a la función que abrirá el menú
+    # After the event loop exits, check the result of the login
     if login.gui_login() is True:
         login.hide()
-        """ mi_app = MiApp()
-        mi_app.show() """
-    
+        mi_app = MiApp()
+        mi_app.show()
+
     sys.exit(app.exec_())
