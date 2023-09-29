@@ -83,6 +83,12 @@ class MiApp(QtWidgets.QMainWindow):
 		self.ui.pushButton_BUSCAR.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_buscar))			
 		self.ui.pushButton_ELIMINAR.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_eliminar))	
 
+		#aceder a los botones registrar
+
+
+
+
+
 		#control barra de titulos
 		self.ui.bt_minimizar.clicked.connect(self.control_bt_minimizar)		
 		self.ui.bt_restaurar.clicked.connect(self.control_bt_normal)
