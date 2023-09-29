@@ -81,7 +81,7 @@ QPushButton#pushButton_5:pressed {
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/image/imagen.jpg);
+     <string notr="true">border-image:url(:/newPrefix/imagen.jpg);
 border-radius:20px;</string>
     </property>
     <property name="text">
