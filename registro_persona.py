@@ -30,6 +30,40 @@ class RegistroPersona:
         self.personas.append(persona)
         print("Persona agregada exitosamente.")
 
+    def editar_persona(self, codigo, nueva_informacion):
+        persona_editada = None
+        for persona in self.personas:
+            if persona.codigo == codigo:
+                persona.nombre = nueva_informacion.get('nombre', persona.nombre)
+                persona.edad = nueva_informacion.get('edad', persona.edad)
+                persona.correo = nueva_informacion.get('correo', persona.correo)
+                persona.numero = nueva_informacion.get('numero', persona.numero)
+                persona.genero = nueva_informacion.get('genero', persona.genero)
+                persona.fecha_nacimiento = nueva_informacion.get('fecha_nacimiento', persona.fecha_nacimiento)
+                persona_editada = persona
+                break
+
+        if persona_editada:
+            # Guardar los cambios en el archivo Excel
+            wb = openpyxl.load_workbook('personas.xlsx')
+            sheet = wb.active
+            for row in sheet.iter_rows(values_only=True):
+                if row[1] == codigo:
+                    # Actualizar los valores en la hoja de cálculo
+                    row[0] = persona_editada.nombre
+                    row[2] = persona_editada.edad
+                    row[3] = persona_editada.correo
+                    row[4] = persona_editada.numero
+                    row[5] = persona_editada.genero
+                    row[6] = persona_editada.fecha_nacimiento
+                    break
+            wb.save('personas.xlsx')
+            print(f"Persona {codigo} editada exitosamente.")
+        else:
+            print(f"No se encontró a {codigo} en el registro.")
+
+
+
     #funcion para eliminar una persona del registro
     def eliminar_persona(self, codigo):
         personas_filtradas = [persona for persona in self.personas if persona.codigo != codigo]

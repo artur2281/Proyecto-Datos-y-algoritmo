@@ -6,6 +6,10 @@ from base_de_datos import BaseDeDatos
 from enviarCorreo import EnviadorDeCorreos
 
 def main():
+
+    # Crear una instancia de BaseDeDatos
+    base_de_datos = BaseDeDatos('personas.xlsx')
+
     registro = RegistroPersona()
     enviador_de_correos = EnviadorDeCorreos('trabajosgrupalesdelcole@gmail.com', 'eqnclstodvineoub')
 
@@ -13,10 +17,11 @@ def main():
     while True:
         print("\nMenú:")
         print("1. Agregar persona")
-        print("2. Eliminar persona")
-        print("3. Mostrar personas")
-        print("4. Buscar persona")
-        print("5. Salir")
+        print("2. Editar persona")
+        print("3. Eliminar persona")
+        print("4. Mostrar personas")
+        print("5. Buscar persona")
+        print("6. Salir")
 
         opcion = input("Seleccione una opción: ")
         
@@ -44,21 +49,28 @@ def main():
             # Agregar persona al registro
             registro.agregar_persona(persona)
 
+            # Luego, guardar la persona en la base de datos utilizando la clase BaseDeDatos
+            base_de_datos.guardar_datos([persona])
+
             # Enviar correo electrónico a la persona recién registrada
             enviador_de_correos.enviar_correo(correo, "Registro exitoso", "Has sido registrado exitosamente.")
 
         elif opcion == "2":
+            codigo = input("Ingrese el codigo de la persona a editar: ")
+            registro.editar_persona(codigo)
+
+        elif opcion == "3":
             codigo = input("Ingrese el codigo de la persona a eliminar: ")
             registro.eliminar_persona(codigo)
 
-        elif opcion == "3":
+        elif opcion == "4":
             registro.mostrar_personas()
 
-        elif opcion == "4":
+        elif opcion == "5":
             codigo = input("Ingrese el codigo de la persona a buscar: ")
             registro.buscar_persona_por_codigo(codigo)
 
-        elif opcion == "5":
+        elif opcion == "6":
             print("Saliendo del programa...")
             break
 
@@ -67,4 +79,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
