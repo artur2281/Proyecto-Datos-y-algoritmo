@@ -3,6 +3,7 @@ from menu import *
 from PyQt5 import QtCore
 from PyQt5.QtCore import QPropertyAnimation
 from PyQt5 import QtCore, QtGui, QtWidgets
+from login import *
 class MiApp(QtWidgets.QMainWindow):
 	def __init__(self):
 		super().__init__()
