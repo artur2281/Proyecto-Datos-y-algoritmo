@@ -1,13 +1,18 @@
 import sys
-
 from PyQt5.QtWidgets import QWidget
 from menu import *
-from PyQt5 import QtCore
-from PyQt5.QtCore import QUrl, QPropertyAnimation, QEasingCurve
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import QUrl, QPropertyAnimation, QEasingCurve,pyqtSignal
+from PyQt5 import QtGui 
 from login import *
 from PyQt5.QtGui import QDesktopServices
-from PyQt5.QtCore import QObject, pyqtSignal
+from modules.registro_persona import RegistroPersona
+from modules.persona import Persona
+## librerias para las tablas
+from PyQt5 import Qt
+from PyQt5.QtGui import QStandardItem, QStandardItemModel
+from PyQt5.QtWidgets import QHeaderView, QTableWidgetItem,QTableWidget
+
+
 
 class Login(QtWidgets.QMainWindow):
 	# Definir una señal personalizada para inicio de sesión exitoso
@@ -60,12 +65,23 @@ class Login(QtWidgets.QMainWindow):
 		return False
 
 class MiApp(QtWidgets.QMainWindow):
+	registro = RegistroPersona()
+	model = QStandardItemModel()
+
+
 	def __init__(self):
 		super().__init__()
 		self.ui = Ui_MainWindow() # intanciamos las clases
 		
-
+		# Crear un modelo de datos
+		self.model.setHorizontalHeaderLabels(["NOMBRE", "EDAD", "CODIGO", "CORREO", "TELEFONO", "GENERO", "NACIMIENTO"])
+		#configurar el nodelo dde datos para la tabla
+		
+	
+		
 		self.ui.setupUi(self)
+		
+
 		
 		#eliminar barra y de titulo - opacidad
 		self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
@@ -83,11 +99,13 @@ class MiApp(QtWidgets.QMainWindow):
 		self.ui.pushButton_BUSCAR.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_buscar))			
 		self.ui.pushButton_ELIMINAR.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_eliminar))	
 
-		#aceder a los botones registrar
-
-
-
-
+		#aceder a los botones 
+		self.ui.pushButton_6registrar.clicked.connect(self.registrar_persona)
+		self.ui.pushButton_buscareliminar.clicked.connect(self.mostrar_tabla_eliminarPersona)
+		self.ui.pushButton_botonelimnar.clicked.connect(self.eliminar_persona)
+		self.ui.pushButton_9botonbuscar.clicked.connect(self.mostrarTabla_buscar_persona)
+		self.ui.bt_REFRESCAR.clicked.connect(self.mostrarTabla_base_datos)
+		self.ui.pushButton_8actualizar.clicked.connect(self.actualizar_informacin)
 
 		#control barra de titulos
 		self.ui.bt_minimizar.clicked.connect(self.control_bt_minimizar)		
@@ -99,7 +117,120 @@ class MiApp(QtWidgets.QMainWindow):
 
 		#menu lateral
 		self.ui.bt_menu.clicked.connect(self.mover_menu)
+
+	##--------------------FUNCIONES PARA LOS BOTONES DENTRO -------------------------------------------------------
+	def registrar_persona(self):
 		
+		nombre = self.ui.lineEdit1nombre.text()
+		edad = self.ui.lineEdit_2edad.text()
+		codigo = self.ui.lineEdit_3codigo.text()
+		correo = self.ui.lineEdit_4correo.text()
+		telefono = self.ui.lineEdit_5telefono.text()
+		genero = self.ui.lineEdit_6genero.text()
+		nacimiento = self.ui.lineEdit_7nacimiento.text()
+		
+		persona = Persona(nombre, codigo, edad, correo, telefono, genero, nacimiento)
+		self.registro.agregar_persona(persona)
+	def buscar_eliminar(self):
+		codigo = self.ui.lineEdit_17ingresarcodigoeliminar.text()
+		self.mostrar_tablas(codigo)
+
+	def actualizar_informacin(self):
+		codigo = self.ui.lineEdit_9codigoactualizar.text()
+		nombre = self.ui.lineEdit_1nombreact.text()
+		edad = self.ui.lineEdit_2edadactualizar.text()
+		correo = self.ui.lineEdit_4correoactualizar.text()
+		telefono = self.ui.lineEdit_5telefonoactualizar.text()
+		genero = self.ui.lineEdit_6generoactualizar.text()
+		nacimiento = self.ui.lineEdit_7nacimientoactualizar.text()
+		nueva_informacion = {'nombre': nombre, 'edad': edad, 'correo': correo, 'numero': telefono, 'genero': genero, 'fecha_nacimiento': nacimiento}
+		self.registro.editar_persona(codigo, nueva_informacion)
+		self.ui.label_20.setText("Persona editada exitosamente")
+	def eliminar_persona(self):
+		codigo = self.ui.lineEdit_17ingresarcodigoeliminar.text()
+		self.registro.eliminar_persona(codigo)
+		self.ui.label_25.setText("Persona eliminada exitosamente")
+	def mostrarTabla_buscar_persona(self):
+		codigo = self.ui.lineEdit_16ingresarcodigobuscar.text()
+		per_encon,num_personasEncontradas = self.registro.buscar_persona_por_codigo(codigo)
+
+		# Obtener el número de filas de la persona encontrada
+		i = len(per_encon)
+		print("i es igual a:")
+		print(i)
+		self.ui.tablebuscarpersona.setRowCount(num_personasEncontradas)
+
+		
+		if per_encon is not None:
+			# Limpiamos cualquier contenido previo en la tabla
+			self.ui.tablebuscarpersona.clearContents()
+			print(f"Nombre de la persona encontrada: {per_encon[0]}")
+			
+
+			tablerow = 0
+			
+			# Mostramos los datos de la persona encontrada en la tabla
+			for row in per_encon:
+				self.ui.tablebuscarpersona.setItem(tablerow, 0, QTableWidgetItem(per_encon[0]))
+				self.ui.tablebuscarpersona.setItem(tablerow, 1, QTableWidgetItem(str(per_encon[2])))
+				self.ui.tablebuscarpersona.setItem(tablerow, 2, QTableWidgetItem(per_encon[1]))
+				self.ui.tablebuscarpersona.setItem(tablerow, 3, QTableWidgetItem(per_encon[3]))
+				self.ui.tablebuscarpersona.setItem(tablerow, 4, QTableWidgetItem(per_encon[4]))
+				self.ui.tablebuscarpersona.setItem(tablerow, 5, QTableWidgetItem(per_encon[5]))
+				self.ui.tablebuscarpersona.setItem(tablerow, 6, QTableWidgetItem(per_encon[6]))
+
+				tablerow += 1
+		else:
+			print(f"No se encontró a {codigo} en el registro.")
+
+	def mostrarTabla_base_datos(self):
+		table, num_personas = self.registro.mostrar_personas()
+		#establecemos el numero de filas
+		self.ui.tableBASEDEDATOS.setRowCount(num_personas)
+		#Iteramos sobre filas y columnas 
+		for row_index, persona_data in enumerate(table):
+			for col_index, data in enumerate(persona_data):
+				#creamos un objeto y lo configuramos para que imprima
+				item = QTableWidgetItem(str(data))
+				# Establecemos el elemento en la celda de la tabla.
+
+				self.ui.tableBASEDEDATOS.setItem(row_index, col_index, item)
+
+
+
+
+	def mostrar_tabla_eliminarPersona(self):
+		codigo = self.ui.lineEdit_17ingresarcodigoeliminar.text()
+		per_encon,num_personasEncontradas = self.registro.buscar_persona_por_codigo(codigo)
+
+		# Obtener el número de filas de la persona encontrada
+		i = len(per_encon)
+		print("i es igual a:")
+		print(i)
+		self.ui.tableelimnarpersona.setRowCount(num_personasEncontradas)
+
+		if per_encon is not None:
+			# Limpiamos cualquier contenido previo en la tabla
+			self.ui.tableelimnarpersona.clearContents()
+			print(f"Nombre de la persona encontrada: {per_encon[0]}")
+			
+
+			tablerow = 0
+			
+			# Mostramos los datos de la persona encontrada en la tabla
+			for row in per_encon:
+				self.ui.tableelimnarpersona.setItem(tablerow, 0, QTableWidgetItem(per_encon[0]))
+				self.ui.tableelimnarpersona.setItem(tablerow, 1, QTableWidgetItem(str(per_encon[2])))
+				self.ui.tableelimnarpersona.setItem(tablerow, 2, QTableWidgetItem(per_encon[1]))
+				self.ui.tableelimnarpersona.setItem(tablerow, 3, QTableWidgetItem(per_encon[3]))
+				self.ui.tableelimnarpersona.setItem(tablerow, 4, QTableWidgetItem(per_encon[4]))
+				self.ui.tableelimnarpersona.setItem(tablerow, 5, QTableWidgetItem(per_encon[5]))
+				self.ui.tableelimnarpersona.setItem(tablerow, 6, QTableWidgetItem(per_encon[6]))
+
+				tablerow += 1
+		else:
+			print(f"No se encontró a {codigo} en el registro.")
+
 	def control_bt_minimizar(self):
 		self.showMinimized()		
 

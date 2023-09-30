@@ -32,7 +32,7 @@ class Ui_Form(object):
 "QPushButton#pushButton:pressed{\n"
 "padding-left: 5px;\n"
 "padding-top: 5px;\n"
-"backround-color: rgaba(105,118,132,200);\n"
+"background-color: rgaba(105,118,132,200);\n"
 "}\n"
 "\n"
 "\n"
@@ -177,7 +177,7 @@ class Ui_Form(object):
 "QPushButton#pushButton:pressed{\n"
 "padding-left: 5px;\n"
 "padding-top: 5px;\n"
-"backround-color: rgaba(105,118,132,200);\n"
+"background-color: rgaba(105,118,132,200);\n"
 "}")
         self.pushButton.setObjectName("pushButton")
         self.pushButton_4 = QtWidgets.QPushButton(self.widget)
