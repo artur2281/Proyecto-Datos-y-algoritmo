@@ -70,9 +70,10 @@ class Ui_Form(object):
         self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(self.widget)
         self.label_2.setGeometry(QtCore.QRect(30, 30, 311, 420))
-        self.label_2.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(0, 0, 0, 255), stop:1 rgba(255, 255, 255, 50));\n"
-"border-radius:20px;\n"
-"")
+        self.label_2.setStyleSheet("QFrame{\n"
+"background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(70, 0, 70, 255), stop:1 rgba(120, 0, 120, 50));\n"
+"border-radius: 20px;\n"
+"}")
         self.label_2.setText("")
         self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(self.widget)

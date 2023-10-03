@@ -52,3 +52,5 @@ class EnviadorDeCorreos:
                     self.enviar_correo(email_receptor, "Feliz cumpleaños", "Feliz cumpleaños")
                     print(f"Correo enviado a {email_receptor} en {ahora}")
             time.sleep(60*60*24) # dormir durante un día
+
+    

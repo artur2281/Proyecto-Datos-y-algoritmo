@@ -290,8 +290,8 @@ if __name__ == "__main__":
     mi_app = MiApp()
     
 
-    # Iniciar el bucle de eventos de la aplicación
-    """ while login.login:
+    """ # Iniciar el bucle de eventos de la aplicación
+    while login.login:
         # Procesar eventos
         app.processEvents()
 
@@ -305,6 +305,6 @@ if __name__ == "__main__":
             break
 
         # Comprobar si el usuario ha cerrado la aplicación
-        """
+         """
 
     sys.exit(app.exec_())

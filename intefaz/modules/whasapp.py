@@ -6,6 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 import time
 
+
 class Automatizacion:
     def __init__(self):
         options = Options()
@@ -55,7 +56,7 @@ class Automatizacion:
         print(f"Mensaje enviado a {numero_telefono}: {mensaje}")
 
 
-
+#bot para enviar mensajes whatsap 
     def bot_whatsapp(self, numero, ruta_imagen, nombre):
         self.enviar_mensaje(numero, nombre)
         self.enviar_imagen(ruta_imagen)

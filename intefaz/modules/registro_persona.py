@@ -2,7 +2,7 @@ from modules.base_de_datos import BaseDeDatos
 from modules.persona import Persona
 import openpyxl
 from openpyxl import Workbook
-from prettytable import PrettyTable
+#from prettytable import PrettyTable
 
 #clase para el registro de personas
 class RegistroPersona:
@@ -111,3 +111,16 @@ class RegistroPersona:
             
         else:
             print(f"No se encontró a {codigo} en el registro.")
+    
+    #Funcion para extraer el email receptor de la base de datos todos
+    def extraer_emails(self):
+        wb = openpyxl.load_workbook('personas.xlsx')
+        sheet = wb.active
+        emails_receptores = []  # Lista para almacenar los correos electrónicos
+        for row in sheet.iter_rows(values_only=True):
+            email_receptor = row[3]
+            emails_receptores.append(email_receptor)
+        return emails_receptores
+    
+    #funcion para extraer el email receptor segun la fecha del ordenador
+    
