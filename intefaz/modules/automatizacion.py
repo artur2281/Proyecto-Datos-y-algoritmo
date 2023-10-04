@@ -4,6 +4,8 @@ import time
 import datetime
 from enviarCorreo import EnviadorDeCorreos
 from registro_persona import RegistroPersona
+import hombre
+import mujer
 class WhatsAppBot:
     def __init__(self, archivo_db):
         self.db = BaseDeDatos(archivo_db)
@@ -50,7 +52,7 @@ class WhatsAppBot:
 def enviadorCorreos():
     # Definir asunto y cuerpo del correo
     asunto = "Asunto del correo"
-    cuerpo = "Cuerpo del correo"
+    cuerpo = hombre.mensaje_cumpleanos
     
     # Crear instancia de EnviadorDeCorreos
     enviador_de_correos = EnviadorDeCorreos('trabajosgrupalesdelcole@gmail.com', 'dysa uxym osmb wuci')

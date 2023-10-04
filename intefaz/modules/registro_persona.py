@@ -1,5 +1,5 @@
-from modules.base_de_datos import BaseDeDatos
-from modules.persona import Persona
+from base_de_datos import BaseDeDatos
+from persona import Persona
 import openpyxl
 from openpyxl import Workbook
 #from prettytable import PrettyTable
