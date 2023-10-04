@@ -11,7 +11,7 @@ from modules.persona import Persona
 from PyQt5 import Qt
 from PyQt5.QtGui import QStandardItem, QStandardItemModel
 from PyQt5.QtWidgets import QHeaderView, QTableWidgetItem,QTableWidget
-
+from modules.enviarCorreo import EnviadorDeCorreos
 
 
 class Login(QtWidgets.QMainWindow):
@@ -67,7 +67,7 @@ class Login(QtWidgets.QMainWindow):
 class MiApp(QtWidgets.QMainWindow):
 	registro = RegistroPersona()
 	model = QStandardItemModel()
-
+	envi = EnviadorDeCorreos('trabajosgrupalesdelcole@gmail.com', 'dysa uxym osmb wuci')
 
 	def __init__(self):
 		super().__init__()
@@ -98,7 +98,7 @@ class MiApp(QtWidgets.QMainWindow):
 		self.ui.pushButton_ACTUALIZAR.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_actualizar))
 		self.ui.pushButton_BUSCAR.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_buscar))			
 		self.ui.pushButton_ELIMINAR.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_eliminar))	
-
+		self.ui.boton_volver.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_1registrar))
 		#aceder a los botones 
 		self.ui.pushButton_6registrar.clicked.connect(self.registrar_persona)
 		self.ui.pushButton_buscareliminar.clicked.connect(self.mostrar_tabla_eliminarPersona)
@@ -106,7 +106,7 @@ class MiApp(QtWidgets.QMainWindow):
 		self.ui.pushButton_9botonbuscar.clicked.connect(self.mostrarTabla_buscar_persona)
 		self.ui.bt_REFRESCAR.clicked.connect(self.mostrarTabla_base_datos)
 		self.ui.pushButton_8actualizar.clicked.connect(self.actualizar_informacin)
-
+		
 		#control barra de titulos
 		self.ui.bt_minimizar.clicked.connect(self.control_bt_minimizar)		
 		self.ui.bt_restaurar.clicked.connect(self.control_bt_normal)
@@ -118,19 +118,34 @@ class MiApp(QtWidgets.QMainWindow):
 		#menu lateral
 		self.ui.bt_menu.clicked.connect(self.mover_menu)
 
+
+
 	##--------------------FUNCIONES PARA LOS BOTONES DENTRO -------------------------------------------------------
 	def registrar_persona(self):
 		
-		nombre = self.ui.lineEdit1nombre.text()
-		edad = self.ui.lineEdit_2edad.text()
-		codigo = self.ui.lineEdit_3codigo.text()
-		correo = self.ui.lineEdit_4correo.text()
-		telefono = self.ui.lineEdit_5telefono.text()
-		genero = self.ui.lineEdit_6genero.text()
-		nacimiento = self.ui.lineEdit_7nacimiento.text()
+		if True:
+			nombre = self.ui.lineEdit1nombre.text()
+			edad = self.ui.lineEdit_2edad.text()
+			codigo = self.ui.lineEdit_3codigo.text()
+			telefono = self.ui.lineEdit_4correo.text()
+			correo = self.ui.lineEdit_5telefono.text()
+			genero = self.ui.lineEdit_6genero.text()
+			nacimiento = self.ui.lineEdit_7nacimiento.text()
+			self.ui.stackedWidget.setCurrentWidget(self.ui.verificacion_correo)
+			while True:
+				codigo_verificacion = self.ui.codigo_intro.text()
+				
+				self.envi.verificar_correo(correo)
+				if self.envi.generar_codigo_verificacion() == codigo_verificacion:
+					self.ui.codigo_verificacion.setText("Correo verificado")
+					persona = Persona(nombre, codigo, edad, correo, telefono, genero, nacimiento)
+					self.registro.agregar_persona(persona)
+					break
+		else :
+			print("no se pudo registrar")
+
+			
 		
-		persona = Persona(nombre, codigo, edad, correo, telefono, genero, nacimiento)
-		self.registro.agregar_persona(persona)
 	def buscar_eliminar(self):
 		codigo = self.ui.lineEdit_17ingresarcodigoeliminar.text()
 		self.mostrar_tablas(codigo)

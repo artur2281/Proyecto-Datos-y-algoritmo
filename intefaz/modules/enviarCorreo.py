@@ -1,7 +1,7 @@
 from email.message import EmailMessage
 import ssl
 import smtplib
-from base_de_datos import BaseDeDatos
+from modules.base_de_datos import BaseDeDatos
 from datetime import datetime
 import time
 import random
