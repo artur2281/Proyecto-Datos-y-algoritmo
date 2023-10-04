@@ -1,5 +1,5 @@
-from modules.base_de_datos import BaseDeDatos
-from modules.persona import Persona
+from base_de_datos import BaseDeDatos
+from persona import Persona
 import openpyxl
 from openpyxl import Workbook
 #from prettytable import PrettyTable
@@ -114,7 +114,7 @@ class RegistroPersona:
     
     #Funcion para extraer el email receptor de la base de datos todos
     def extraer_emails(self):
-        wb = openpyxl.load_workbook('personas.xlsx')
+        wb = openpyxl.load_workbook('G:\Proyecto final\Proyecto-Datos-y-algoritmo\intefaz\personas.xlsx')
         sheet = wb.active
         emails_receptores = []  # Lista para almacenar los correos electrónicos
         for row in sheet.iter_rows(values_only=True):

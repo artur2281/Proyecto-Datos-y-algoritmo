@@ -25,6 +25,7 @@ class Automatizacion:
         file_input.send_keys(ruta_imagen)
         send_icon = self.driver.find_element(By.XPATH, '//*[@id="app"]/div/div/div[3]/div[2]/span/div/span/div/div/div[2]/div/div[2]/div[2]/div/div/span')
         send_icon.click()
+        time.sleep(2)
 
     def validar_qr(self):
         try:
@@ -60,4 +61,5 @@ class Automatizacion:
     def bot_whatsapp(self, numero, ruta_imagen, nombre):
         self.enviar_mensaje(numero, nombre)
         self.enviar_imagen(ruta_imagen)
+
         
