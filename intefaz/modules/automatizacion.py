@@ -4,8 +4,7 @@ import time
 import datetime
 from enviarCorreo import EnviadorDeCorreos
 from registro_persona import RegistroPersona
-import hombre
-import mujer
+
 class WhatsAppBot:
     def __init__(self, archivo_db):
         self.db = BaseDeDatos(archivo_db)
@@ -49,14 +48,25 @@ class WhatsAppBot:
             else:
                 print("Fecha en los datos no coincide con la fecha actual. Omitiendo.")
 
+
+
+
+
+
+
+
+
+
 def enviadorCorreos():
     # Definir asunto y cuerpo del correo
-    asunto = "Asunto del correo"
-    cuerpo = hombre.mensaje_cumpleanos
+    
+    
     
     # Crear instancia de EnviadorDeCorreos
     enviador_de_correos = EnviadorDeCorreos('trabajosgrupalesdelcole@gmail.com', 'dysa uxym osmb wuci')
     db = BaseDeDatos("G:\Proyecto final\Proyecto-Datos-y-algoritmo\intefaz\personas.xlsx")
+    asunto = "Asunto del correo"
+    cuerpo = enviador_de_correos.mensaje_personalisado()
     recipients= db.obtener_datos()
 
         # Enviar mensajes a cada destinatario
@@ -91,11 +101,11 @@ def enviadorCorreos():
 
 
 # Llamar a la función para enviar correos
-#enviadorCorreos()
+enviadorCorreos()
 
 # Crear una instancia de la clase WhatsAppBot
 archivo = "G:\Proyecto final\Proyecto-Datos-y-algoritmo\intefaz\personas.xlsx"
-bot = WhatsAppBot(archivo)
-bot.enviar_mensajes_condicionalmente()
+# bot = WhatsAppBot(archivo)
+#bot.enviar_mensajes_condicionalmente()
 # Enviar mensajes a los destinatarios
 #bot.enviar_mensajes()
