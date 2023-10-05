@@ -69,6 +69,7 @@ class MiApp(QtWidgets.QMainWindow):
 	model = QStandardItemModel()
 	envi = EnviadorDeCorreos()
 	registro = RegistroPersona()
+	registro = BaseDeDatos()
 	def __init__(self):
 		super().__init__()
 		
@@ -93,6 +94,8 @@ class MiApp(QtWidgets.QMainWindow):
 		self.grip.resize(self.gripSize, self.gripSize)
 		# mover ventana
 		self.ui.frame_superior.mouseMoveEvent = self.mover_ventana
+		#pagina de inicio
+		self.ui.stackedWidget.setCurrentWidget(self.ui.page)
 		#acceder a las paginas
 		self.ui.pushButton_REGISTRAR.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_1registrar))
 		self.ui.pushButton_BASEDEDATOS.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.pageDATOS))	
@@ -109,6 +112,7 @@ class MiApp(QtWidgets.QMainWindow):
 		self.ui.bt_REFRESCAR.clicked.connect(self.mostrarTabla_base_datos)
 		self.ui.pushButton_8actualizar.clicked.connect(self.actualizar_informacin)
 		self.ui.boton_verificacionCorreo.clicked.connect(self.comparacion_codigos)
+		self.ui.pushButton_7buscaractualizar.clicked.connect(self.boton_buscar_actualizar)
 		#control barra de titulos
 		self.ui.bt_minimizar.clicked.connect(self.control_bt_minimizar)		
 		self.ui.bt_restaurar.clicked.connect(self.control_bt_normal)
@@ -171,6 +175,17 @@ class MiApp(QtWidgets.QMainWindow):
 		codigo = self.ui.lineEdit_17ingresarcodigoeliminar.text()
 		self.mostrar_tablas(codigo)
 
+
+
+	def boton_buscar_actualizar(self):
+		codigo = self.ui.lineEdit_9codigoactualizar.text()
+		per_encon,num_personasEncontradas = self.registro.buscar_persona_por_codigo(codigo)
+		if num_personasEncontradas > 0:
+			self.ui.label_actualizarverificacion.setText("Persona encontrada")
+			print("Persona encontrada")
+		else:
+			self.ui.label_actualizarverificacion.setText("Persona no encontrada")
+			print("Persona no encontrada")
 	def actualizar_informacin(self):
 		codigo = self.ui.lineEdit_9codigoactualizar.text()
 		nombre = self.ui.lineEdit_1nombreact.text()
@@ -180,12 +195,22 @@ class MiApp(QtWidgets.QMainWindow):
 		genero = self.ui.lineEdit_6generoactualizar.text()
 		nacimiento = self.ui.lineEdit_7nacimientoactualizar.text()
 		nueva_informacion = {'nombre': nombre, 'edad': edad, 'correo': correo, 'numero': telefono, 'genero': genero, 'fecha_nacimiento': nacimiento}
-		self.registro.editar_persona(codigo, nueva_informacion)
-		self.ui.label_20.setText("Persona editada exitosamente")
+		try:
+			self.registro.editar_persona(codigo, nueva_informacion)
+			self.ui.label_actualizarverificacion.setText("Persona editada exitosamente")
+		except Exception as e:
+			self.ui.label_actualizarverificacion.setText("No se pudo editar la persona")
+			print(f"Error al editar la persona: {str(e)}")
 	def eliminar_persona(self):
 		codigo = self.ui.lineEdit_17ingresarcodigoeliminar.text()
-		self.registro.eliminar_persona(codigo)
-		self.ui.label_25.setText("Persona eliminada exitosamente")
+		try:
+			self.registro.eliminar_persona(codigo)
+			self.ui.label_eliminarverificacion.setText("Persona eliminada exitosamente")
+		except Exception as e:
+			self.ui.label_eliminarverificacion.setText("Persona no fue eliminada")
+			print(f"Error al eliminar la persona: {str(e)}")
+
+
 	def mostrarTabla_buscar_persona(self):
 		codigo = self.ui.lineEdit_16ingresarcodigobuscar.text()
 		per_encon,num_personasEncontradas = self.registro.buscar_persona_por_codigo(codigo)
