@@ -63,7 +63,7 @@ class Login(QtWidgets.QMainWindow):
 			
         
 		return False
-
+	
 class MiApp(QtWidgets.QMainWindow):
 	registro = RegistroPersona()
 	model = QStandardItemModel()
