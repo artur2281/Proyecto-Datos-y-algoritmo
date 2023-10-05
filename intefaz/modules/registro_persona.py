@@ -8,8 +8,8 @@ from openpyxl import Workbook
 class RegistroPersona:
     #funcion para inicializar el registro
     def __init__(self):
-        self.bd = BaseDeDatos('personas.xlsx')
-        self.bd.cerrar()
+        self.bd = BaseDeDatos()
+        #SSself.bd.cerrar()
         datos = self.bd.obtener_datos()
         if isinstance(datos, list) and all(isinstance(d, dict) for d in datos):
             self.personas = [Persona(**persona) for persona in datos]

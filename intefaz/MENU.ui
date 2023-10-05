@@ -432,7 +432,7 @@ font: 77 10pt &quot;Arial Black&quot;;
           <item>
            <widget class="QStackedWidget" name="stackedWidget">
             <property name="currentIndex">
-             <number>3</number>
+             <number>0</number>
             </property>
             <widget class="QWidget" name="verificacion_correo">
              <widget class="QLabel" name="codigo_verificacion">
@@ -526,7 +526,7 @@ font: 77 10pt &quot;Arial Black&quot;;
               </property>
               <property name="icon">
                <iconset>
-                <normaloff>../../../../Downloads/Copia de Menú de Opciones.png</normaloff>../../../../Downloads/Copia de Menú de Opciones.png</iconset>
+                <normaloff>../../../Downloads/Copia de Menú de Opciones.png</normaloff>../../../Downloads/Copia de Menú de Opciones.png</iconset>
               </property>
               <property name="iconSize">
                <size>
