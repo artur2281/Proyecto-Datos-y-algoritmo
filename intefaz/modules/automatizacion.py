@@ -63,7 +63,7 @@ def enviadorCorreos():
     
     
     # Crear instancia de EnviadorDeCorreos
-    enviador_de_correos = EnviadorDeCorreos('trabajosgrupalesdelcole@gmail.com', 'dysa uxym osmb wuci')
+    enviador_de_correos = EnviadorDeCorreos()
     db = BaseDeDatos("G:\Proyecto final\Proyecto-Datos-y-algoritmo\intefaz\personas.xlsx")
     asunto = "Asunto del correo"
     cuerpo = enviador_de_correos.mensaje_personalisado()

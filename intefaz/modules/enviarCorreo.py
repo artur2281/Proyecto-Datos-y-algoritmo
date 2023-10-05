@@ -8,9 +8,9 @@ import random
 import string
 
 class EnviadorDeCorreos:
-    def __init__(self, email_emisor, email_contrasena):
-        self.email_emisor = email_emisor
-        self.email_contrasena = email_contrasena
+    def __init__(self):
+        self.email_emisor = 'trabajosgrupalesdelcole@gmail.com'
+        self.email_contrasena ='dysa uxym osmb wuci'
     
 
         self.nombre = None 
@@ -35,7 +35,7 @@ class EnviadorDeCorreos:
         """Genera un código de verificación aleatorio."""
         return ''.join(random.choice(string.digits) for _ in range(longitud))
 
-    def verificar_correo(self, email_receptor,codigo_usuario):
+    def enviar_codigo_verificacion (self, email_receptor):
         """Envía un código de verificación al correo del receptor y espera su confirmación."""
         codigo_verificacion = self.generar_codigo_verificacion()
         print(f"Enviando correo a {email_receptor} ")
@@ -44,8 +44,15 @@ class EnviadorDeCorreos:
         except Exception as e:
             print(f"Error al enviar correo: {e}")
             return False
-        codigo_usuario = input("Introduce el código de verificación que has recibido en tu correo: ")
-        return codigo_verificacion == codigo_usuario
+        
+        return codigo_verificacion
+    def comparar_codigos(self,codigo_verificacion,codigo_usuario):
+        if codigo_verificacion == codigo_usuario:
+        # Los códigos son iguales, la verificación es exitosa
+            return True
+        else:
+            # Los códigos no son iguales, la verificación falla
+            return False
 
     def programar_correo(self):
         db = BaseDeDatos('personas.xlsx')
