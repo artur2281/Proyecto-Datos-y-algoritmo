@@ -68,10 +68,10 @@ class MiApp(QtWidgets.QMainWindow):
 	
 	model = QStandardItemModel()
 	envi = EnviadorDeCorreos()
-
+	registro = RegistroPersona()
 	def __init__(self):
 		super().__init__()
-		self.registro = RegistroPersona()
+		
 		self.ui = Ui_MainWindow() # intanciamos las clases
 		
 		# Crear un modelo de datos
