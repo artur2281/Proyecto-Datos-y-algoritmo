@@ -12,7 +12,6 @@ from PyQt5.QtGui import QStandardItem, QStandardItemModel
 from PyQt5.QtWidgets import QHeaderView, QTableWidgetItem,QTableWidget
 from modules.enviarCorreo import EnviadorDeCorreos
 from modules.base_de_datos import BaseDeDatos
-from modules.registro_persona import RegistroPersona
 
 class Login(QtWidgets.QMainWindow):
 	# Definir una señal personalizada para inicio de sesión exitoso
@@ -68,7 +67,7 @@ class MiApp(QtWidgets.QMainWindow):
 	
 	model = QStandardItemModel()
 	envi = EnviadorDeCorreos()
-	registro = RegistroPersona()
+
 	registro = BaseDeDatos()
 	def __init__(self):
 		super().__init__()

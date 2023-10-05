@@ -1,7 +1,7 @@
 from email.message import EmailMessage
 import ssl
 import smtplib
-from modules.base_de_datos import BaseDeDatos
+from base_de_datos import BaseDeDatos
 from datetime import datetime
 import time
 import random
@@ -11,7 +11,7 @@ class EnviadorDeCorreos:
     def __init__(self):
         self.email_emisor = 'trabajosgrupalesdelcole@gmail.com'
         self.email_contrasena ='dysa uxym osmb wuci'
-        self.email_contrasena = 'dysa uxym osmb wuci'
+
     
 
         self.nombre = None 
@@ -74,7 +74,7 @@ class EnviadorDeCorreos:
             time.sleep(60*60*24) # dormir durante un día
 
     def mensaje_personalisado(self):
-        db = BaseDeDatos("G:\Proyecto final\Proyecto-Datos-y-algoritmo\intefaz\personas.xlsx")
+        db = BaseDeDatos()
         recipients = db.obtener_datos()
         
         mensaje_cumpleanos_hombre = """

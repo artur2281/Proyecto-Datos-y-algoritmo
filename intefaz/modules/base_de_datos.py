@@ -1,6 +1,6 @@
 import openpyxl
 from openpyxl import Workbook
-from modules.persona import Persona
+from persona import Persona
 
 
 class BaseDeDatos:
@@ -131,6 +131,17 @@ class BaseDeDatos:
         else:
             print(f"No se encontró a {codigo} en el registro.")
 
+
+    #funcion no se utiliza 
+    def extraer_emails(self):
+        wb = openpyxl.load_workbook(self.archivo)
+        
+        sheet = wb.active
+        emails_receptores = []  # Lista para almacenar los correos electrónicos
+        for row in sheet.iter_rows(values_only=True):
+            email_receptor = row[3]
+            emails_receptores.append(email_receptor)
+        return emails_receptores
 
     def cerrar(self):
         pass

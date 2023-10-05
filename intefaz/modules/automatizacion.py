@@ -3,11 +3,10 @@ from whasapp import Automatizacion  # Importa la clase Automatizacion
 import time
 import datetime
 from enviarCorreo import EnviadorDeCorreos
-from registro_persona import RegistroPersona
 
 class WhatsAppBot:
-    def __init__(self, archivo_db):
-        self.db = BaseDeDatos(archivo_db)
+    def __init__(self):
+        self.db = BaseDeDatos()
         self.automatizacion = Automatizacion()  # Crea una instancia de Automatizacion
 
     def enviar_mensajes(self):
@@ -64,7 +63,7 @@ def enviadorCorreos():
     
     # Crear instancia de EnviadorDeCorreos
     enviador_de_correos = EnviadorDeCorreos()
-    db = BaseDeDatos("G:\Proyecto final\Proyecto-Datos-y-algoritmo\intefaz\personas.xlsx")
+    db = BaseDeDatos()
     asunto = "Asunto del correo"
     cuerpo = enviador_de_correos.mensaje_personalisado()
     recipients= db.obtener_datos()
@@ -104,8 +103,8 @@ def enviadorCorreos():
 enviadorCorreos()
 
 # Crear una instancia de la clase WhatsAppBot
-archivo = "G:\Proyecto final\Proyecto-Datos-y-algoritmo\intefaz\personas.xlsx"
-# bot = WhatsAppBot(archivo)
+
+# bot = WhatsAppBot()
 #bot.enviar_mensajes_condicionalmente()
 # Enviar mensajes a los destinatarios
 #bot.enviar_mensajes()
