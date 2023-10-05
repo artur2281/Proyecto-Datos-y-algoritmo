@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1199</width>
+    <height>664</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <widget class="QFrame" name="verticalFrame">
+     <property name="styleSheet">
+      <string notr="true">QFrame{
+
+	background-color:rgb(92, 3, 117);
+	border-radius: 10px;
+
+}</string>
+     </property>
+     <widget class="QFrame" name="verticalFrame">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>1141</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QFrame{
+
+	background-color:rgb(121, 30, 124);
+	border-radius: 10px;
+	borde: 10px solid #000000;
+
+}</string>
+      </property>
+     </widget>
+     <widget class="QFrame" name="verticalFrame">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>140</y>
+        <width>521</width>
+        <height>471</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QFrame{
+
+	background-color:rgb(121, 30, 124);
+	border-radius: 10px;
+	border: rgb(0, 0, 0);
+
+}</string>
+      </property>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
