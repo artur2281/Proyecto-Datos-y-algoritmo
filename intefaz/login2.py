@@ -5,13 +5,13 @@ from PyQt5.QtCore import QUrl, QPropertyAnimation, QEasingCurve,pyqtSignal
 from PyQt5 import QtGui 
 from login import *
 from PyQt5.QtGui import QDesktopServices
-from modules.registro_persona import RegistroPersona
 from modules.persona import Persona
 ## librerias para las tablas
 from PyQt5 import Qt
 from PyQt5.QtGui import QStandardItem, QStandardItemModel
 from PyQt5.QtWidgets import QHeaderView, QTableWidgetItem,QTableWidget
 from modules.enviarCorreo import EnviadorDeCorreos
+from modules.base_de_datos import BaseDeDatos
 
 
 class Login(QtWidgets.QMainWindow):
@@ -65,9 +65,9 @@ class Login(QtWidgets.QMainWindow):
 		return False
 	
 class MiApp(QtWidgets.QMainWindow):
-	registro = RegistroPersona()
+	bs =BaseDeDatos()
 	model = QStandardItemModel()
-	envi = EnviadorDeCorreos('trabajosgrupalesdelcole@gmail.com', 'dysa uxym osmb wuci')
+	envi = EnviadorDeCorreos()
 
 	def __init__(self):
 		super().__init__()
@@ -99,7 +99,7 @@ class MiApp(QtWidgets.QMainWindow):
 		self.ui.pushButton_BUSCAR.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_buscar))			
 		self.ui.pushButton_ELIMINAR.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_eliminar))	
 		self.ui.boton_volver.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_1registrar))
-		self.ui.pushButton_3.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.verificacion_correo),self.enviar_correo1)
+		self.ui.pushButton_3.clicked.connect(self.enviar_correo)
 		#aceder a los botones 
 		self.ui.pushButton_6registrar.clicked.connect(self.registrar_persona)
 		self.ui.pushButton_buscareliminar.clicked.connect(self.mostrar_tabla_eliminarPersona)
@@ -107,7 +107,7 @@ class MiApp(QtWidgets.QMainWindow):
 		self.ui.pushButton_9botonbuscar.clicked.connect(self.mostrarTabla_buscar_persona)
 		self.ui.bt_REFRESCAR.clicked.connect(self.mostrarTabla_base_datos)
 		self.ui.pushButton_8actualizar.clicked.connect(self.actualizar_informacin)
-		self.ui.boton_verificacionCorreo.clicked.connect(self.enviar_correo)
+		self.ui.boton_verificacionCorreo.clicked.connect(self.comparacion_codigos)
 		#control barra de titulos
 		self.ui.bt_minimizar.clicked.connect(self.control_bt_minimizar)		
 		self.ui.bt_restaurar.clicked.connect(self.control_bt_normal)
@@ -119,18 +119,28 @@ class MiApp(QtWidgets.QMainWindow):
 		#menu lateral
 		self.ui.bt_menu.clicked.connect(self.mover_menu)
 
-
 	#------------------Enviar correo de verificacion----------------------------------------------------------------
 	def enviar_correo(self,correo):
-		
-		self.envi.verificar_correo(correo,codi)
-		print("correo enviado")
-		codi = self.ui.codigo_intro.text()
-	
-		return True
-	
-	def enviar_correo1(self,correo):
 		correo = self.ui.lineEdit_5telefono.text()
+		self.ui.stackedWidget.setCurrentWidget(self.ui.verificacion_correo)
+		self.codi = self.envi.enviar_codigo_verificacion(correo)
+		
+	
+		return self.codi
+	
+	def comparacion_codigos(self):
+		codigo_usuario = self.ui.codigo_intro.text()
+		verificacion_exitosa = self.envi.comparar_codigos(self.codi, codigo_usuario)
+		print("se comparo los códigos")
+		if verificacion_exitosa:
+			print("Los códigos coinciden, se realizó la verificación exitosamente")
+			self.ui.codigo_verificacion.setText("Verificación exitosa")
+			# Resto del código para registrar la persona si los códigos coinciden
+			return True
+		else:
+			print("Los códigos no coinciden, la verificación ha fallado")
+			# Manejar el caso en que la verificación falla (puede mostrar un mensaje al usuario)
+			self.ui.codigo_verificacion.setText("Verificación incorreta")
 	##--------------------FUNCIONES PARA LOS BOTONES DENTRO -------------------------------------------------------
 	def registrar_persona(self):
 		
@@ -146,13 +156,13 @@ class MiApp(QtWidgets.QMainWindow):
 			
 			
 				
-			if self.enviar_correo(correo) == True :
+			if self.comparacion_codigos():
 				persona = Persona(nombre, codigo, edad, correo, telefono, genero, nacimiento)
-				self.registro.agregar_persona(persona)
+				self.bs.agregar_persona(persona)
+				self.ui.label_registroverificacion.setText("Persona agregada exitosamente")
 			else:
-				print("no se pudo registrar")	
-		else :
-			print("no se pudo registrar")
+				print("No se pudo registrar debido a que los códigos no coinciden")
+				
 
 			
 		
@@ -169,15 +179,15 @@ class MiApp(QtWidgets.QMainWindow):
 		genero = self.ui.lineEdit_6generoactualizar.text()
 		nacimiento = self.ui.lineEdit_7nacimientoactualizar.text()
 		nueva_informacion = {'nombre': nombre, 'edad': edad, 'correo': correo, 'numero': telefono, 'genero': genero, 'fecha_nacimiento': nacimiento}
-		self.registro.editar_persona(codigo, nueva_informacion)
+		self.bs.editar_persona(codigo, nueva_informacion)
 		self.ui.label_20.setText("Persona editada exitosamente")
 	def eliminar_persona(self):
 		codigo = self.ui.lineEdit_17ingresarcodigoeliminar.text()
-		self.registro.eliminar_persona(codigo)
+		self.bs.eliminar_persona(codigo)
 		self.ui.label_25.setText("Persona eliminada exitosamente")
 	def mostrarTabla_buscar_persona(self):
 		codigo = self.ui.lineEdit_16ingresarcodigobuscar.text()
-		per_encon,num_personasEncontradas = self.registro.buscar_persona_por_codigo(codigo)
+		per_encon,num_personasEncontradas = self.bs.buscar_persona_por_codigo(codigo)
 
 		# Obtener el número de filas de la persona encontrada
 		i = len(per_encon)
@@ -206,10 +216,10 @@ class MiApp(QtWidgets.QMainWindow):
 
 				tablerow += 1
 		else:
-			print(f"No se encontró a {codigo} en el registro.")
+			print(f"No se encontró a {codigo} en el bs.")
 
 	def mostrarTabla_base_datos(self):
-		table, num_personas = self.registro.mostrar_personas()
+		table, num_personas = self.bs.mostrar_personas()
 		#establecemos el numero de filas
 		self.ui.tableBASEDEDATOS.setRowCount(num_personas)
 		#Iteramos sobre filas y columnas 
@@ -226,7 +236,7 @@ class MiApp(QtWidgets.QMainWindow):
 
 	def mostrar_tabla_eliminarPersona(self):
 		codigo = self.ui.lineEdit_17ingresarcodigoeliminar.text()
-		per_encon,num_personasEncontradas = self.registro.buscar_persona_por_codigo(codigo)
+		per_encon,num_personasEncontradas = self.bs.buscar_persona_por_codigo(codigo)
 
 		# Obtener el número de filas de la persona encontrada
 		i = len(per_encon)
@@ -254,7 +264,7 @@ class MiApp(QtWidgets.QMainWindow):
 
 				tablerow += 1
 		else:
-			print(f"No se encontró a {codigo} en el registro.")
+			print(f"No se encontró a {codigo} en el bs.")
 
 	def control_bt_minimizar(self):
 		self.showMinimized()		
