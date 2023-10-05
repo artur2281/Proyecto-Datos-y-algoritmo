@@ -11,6 +11,7 @@ class EnviadorDeCorreos:
     def __init__(self):
         self.email_emisor = 'trabajosgrupalesdelcole@gmail.com'
         self.email_contrasena ='dysa uxym osmb wuci'
+        self.email_contrasena = 'dysa uxym osmb wuci'
     
 
         self.nombre = None 
@@ -37,8 +38,9 @@ class EnviadorDeCorreos:
 
     def enviar_codigo_verificacion (self, email_receptor):
         """Envía un código de verificación al correo del receptor y espera su confirmación."""
+    def enviar_codigo_verificacion(self, email_receptor):
         codigo_verificacion = self.generar_codigo_verificacion()
-        print(f"Enviando correo a {email_receptor} ")
+        print(f"Enviando código de verificación a {email_receptor}")
         try:
             self.enviar_correo(email_receptor, "Código de verificación", f"Tu código de verificación es {codigo_verificacion}")
         except Exception as e:
@@ -47,6 +49,10 @@ class EnviadorDeCorreos:
         
         return codigo_verificacion
     def comparar_codigos(self,codigo_verificacion,codigo_usuario):
+        return codigo_verificacion
+
+    def comparar_codigos(self, codigo_verificacion, codigo_usuario):
+        
         if codigo_verificacion == codigo_usuario:
         # Los códigos son iguales, la verificación es exitosa
             return True

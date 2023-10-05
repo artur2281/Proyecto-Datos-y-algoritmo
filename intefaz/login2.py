@@ -65,12 +65,13 @@ class Login(QtWidgets.QMainWindow):
 		return False
 	
 class MiApp(QtWidgets.QMainWindow):
-	registro_ =BaseDeDatos("G:\Proyecto final\Proyecto-Datos-y-algoritmo\intefaz\personas.xlsx")
+	
 	model = QStandardItemModel()
 	envi = EnviadorDeCorreos()
-	registro = RegistroPersona()
+
 	def __init__(self):
 		super().__init__()
+		self.registro = RegistroPersona()
 		self.ui = Ui_MainWindow() # intanciamos las clases
 		
 		# Crear un modelo de datos
@@ -179,7 +180,7 @@ class MiApp(QtWidgets.QMainWindow):
 		genero = self.ui.lineEdit_6generoactualizar.text()
 		nacimiento = self.ui.lineEdit_7nacimientoactualizar.text()
 		nueva_informacion = {'nombre': nombre, 'edad': edad, 'correo': correo, 'numero': telefono, 'genero': genero, 'fecha_nacimiento': nacimiento}
-		self.registro.editar_persona_por_codigo(codigo, nueva_informacion)
+		self.registro.editar_persona(codigo, nueva_informacion)
 		self.ui.label_20.setText("Persona editada exitosamente")
 	def eliminar_persona(self):
 		codigo = self.ui.lineEdit_17ingresarcodigoeliminar.text()
