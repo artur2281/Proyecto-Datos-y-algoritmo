@@ -11,7 +11,7 @@ class EnviadorDeCorreos:
     def __init__(self):
         self.email_emisor = 'trabajosgrupalesdelcole@gmail.com'
         self.email_contrasena ='dysa uxym osmb wuci'
-
+        self.email_contrasena = 'dysa uxym osmb wuci'
     
 
         self.nombre = None 
@@ -61,7 +61,7 @@ class EnviadorDeCorreos:
             return False
 
     def programar_correo(self):
-        db = BaseDeDatos('personas.xlsx')
+        db = BaseDeDatos()
         while True:
             ahora = datetime.now()
             destinatarios = db.obtener_datos()
@@ -76,83 +76,70 @@ class EnviadorDeCorreos:
     def mensaje_personalisado(self):
         db = BaseDeDatos()
         recipients = db.obtener_datos()
+        ahora = datetime.now()
         
-        mensaje_cumpleanos_hombre = """
-        Asunto: Felicitaciones de Cumpleaños
+        mensaje_cumpleanos_hombre = """Asunto: Felicitaciones de Cumpleaños
 
         Estimado {nombre},
 
-        En este día tan especial, queremos tomar un momento para celebrar contigo y desearte un 
-        cumpleaños lleno de alegría y momentos inolvidables. Queremos reconocer y apreciar 
-        sinceramente tu dedicación y contribución significativa a nuestro equipo y empresa.
 
-        {nombre}, tu capacidad para enfrentar desafíos con determinación y tu compromiso con la 
-        excelencia son verdaderamente inspiradores. Has demostrado ser un miembro valioso de nuestro 
-        equipo, y estamos agradecidos por tu arduo trabajo y tu dedicación continua.
+        En este día especial, queremos expresar nuestro reconocimiento por tu dedicación y contribución significativa a nuestra empresa. Tu capacidad para superar desafíos con determinación y tu compromiso con la excelencia son inspiradores. Eres un miembro valioso de nuestro equipo y estamos agradecidos por tu arduo trabajo y dedicación continua.
 
-        Es un placer para nosotros ver cómo has prosperado y has crecido en nuestra empresa. Tu 
-        habilidad para establecer relaciones sólidas con tus compañeros de trabajo y tu actitud 
-        positiva han contribuido significativamente a nuestra cultura empresarial. Estamos encantados 
-        de que hayas encontrado un hogar en nuestro equipo.
+        Nos alegra ver cómo has crecido en nuestra empresa y cómo has contribuido a nuestra cultura empresarial con tus sólidas relaciones interpersonales y actitud positiva. Te enviamos este ramo de felicidad y nuestros mejores deseos en tu cumpleaños. Que este nuevo año de vida te traiga éxito en tus proyectos, buena salud y momentos felices con tus seres queridos.
 
-        En tu día especial, te enviamos este ramo de felicidad y nuestros mejores deseos. Que este 
-        nuevo año de vida te traiga éxito en tus proyectos, salud para disfrutarlo y momentos felices 
-        con tus seres queridos.
-
-        Que este cumpleaños sea solo el comienzo de un año lleno de logros, aprendizajes y momentos 
-        inolvidables. Apreciamos todo lo que haces y esperamos seguir celebrando tus éxitos junto a ti.
+        Esperamos que este cumpleaños sea el comienzo de un año lleno de logros y momentos inolvidables. Valoramos enormemente tu trabajo y esperamos celebrar más éxitos juntos.
 
         ¡Feliz cumpleaños, {nombre}! Que tengas un día maravilloso y un año lleno de éxito y felicidad.
 
-        Con aprecio,
-        VISGALI
-        """
+        Con aprecio, La empresa VISGALI"""
 
-        mensaje_cumpleanos_mujer = """
-        Asunto: Felicitaciones de Cumpleaños
+        
+
+        mensaje_cumpleanos_mujer = """Asunto: Felicitaciones de Cumpleaños
 
         Estimada {nombre},
 
-        En este día lleno de alegría y celebración, queremos detenernos un momento para 
-        reconocer y honrar a una empleada excepcional: tú. Hoy, estamos celebrando no 
-        solo tu cumpleaños, sino también tu valiosa contribución a nuestra empresa y equipo.
+        En este día lleno de alegría y celebración, queremos detenernos un momento para reconocer y honrar a una empleada excepcional: tú. Hoy, estamos celebrando no solo tu cumpleaños, sino también tu valiosa contribución a nuestra empresa y equipo.
 
-        Tu dedicación incansable, tu profesionalismo ejemplar y tu actitud positiva son 
-        verdaderamente inspiradores para todos nosotros. Eres mucho más que una empleada; 
-        eres una parte fundamental de nuestro equipo, y estamos increíblemente agradecidos 
-        por tenerte con nosotros.
+        Tu dedicación incansable, tu profesionalismo ejemplar y tu actitud positiva son verdaderamente inspiradores para todos nosotros. Eres mucho más que una empleada; eres una parte fundamental de nuestro equipo, y estamos increíblemente agradecidos por tenerte con nosotros.
 
-        En cada proyecto, en cada desafío, has demostrado ser una fuerza confiable y poderosa. 
-        Tu ética laboral y tu habilidad para superar obstáculos no tienen comparación. En este 
-        día especial, queremos expresarte nuestra más sincera gratitud por tu arduo trabajo y 
-        dedicación.
+        En cada proyecto, en cada desafío, has demostrado ser una fuerza confiable y poderosa. Tu ética laboral y tu habilidad para superar obstáculos no tienen comparación. En este día especial, queremos expresarte nuestra más sincera gratitud por tu arduo trabajo y dedicación.
 
-        Que este nuevo año en tu vida esté lleno de momentos inolvidables, logros personales y 
-        profesionales, y mucha felicidad. Esperamos que este día te brinde todo lo que mereces 
-        y más.
+        Que este nuevo año en tu vida esté lleno de momentos inolvidables, logros personales y profesionales, y mucha felicidad. Esperamos que este día te brinde todo lo que mereces y más.
 
-        ¡Que tengas un cumpleaños lleno de alegría, risas y amor! Disfruta cada momento de este 
-        día especial, porque te lo mereces. Estamos emocionados de compartir este día contigo y 
-        esperamos que este año esté lleno de éxito y realización personal para ti.
+        ¡Que tengas un cumpleaños lleno de alegría, risas y amor! Disfruta cada momento de este día especial, porque te lo mereces. Estamos emocionados de compartir este día contigo y esperamos que este año esté lleno de éxito y realización personal para ti.
 
-        Una vez más, ¡feliz cumpleaños, {nombre}! Que este sea el mejor año hasta ahora, y que 
-        sigamos celebrando muchos más juntos.
+        Una vez más, ¡feliz cumpleaños, {nombre}! Que este sea el mejor año hasta ahora, y que sigamos celebrando muchos más juntos.
 
-        Con aprecio,
-        VISGALI
-        """
+        Con aprecio, La empresa VISGALI"""
+
 
         for recipient in recipients:
             genero_recipient = recipient['genero']
             nombre_recipient = recipient['nombre']
-            nombre = nombre_recipient
-            print(nombre_recipient)
+            fecha_nacimiento = datetime.strptime(recipient['fecha_nacimiento'], '%d/%m/%Y')
 
-            if genero_recipient == 'F':
-                mensaje = mensaje_cumpleanos_mujer.format(nombre=nombre)
-                return   mensaje
-            elif genero_recipient == 'M':
-                mensaje = mensaje_cumpleanos_hombre.format(nombre=nombre)
-                return mensaje
-            else:
-                print("No se reconoce el género")
+            # Verificar si la fecha de nacimiento coincide con la fecha actual
+            if fecha_nacimiento.month == ahora.month and fecha_nacimiento.day == ahora.day:
+
+                #Aqui se define si el mesanje para un hombre o mujer(y que cada nombre sea diferente de cada persona)
+                if genero_recipient == 'F':
+                    mensaje = mensaje_cumpleanos_mujer.format(nombre=nombre_recipient)
+                elif genero_recipient == 'M':
+                    mensaje = mensaje_cumpleanos_hombre.format(nombre=nombre_recipient)
+                else:
+                    print(f"No se reconoce el género para {nombre_recipient}")
+
+            
+
+                # Aquí debes enviar el mensaje a través de tu método de envío de correo
+                email_receptor = recipient['correo']
+                self.enviar_correo(email_receptor, "Feliz cumpleaños", mensaje)
+                print(nombre_recipient)  # Mover la impresión del nombre aquí
+                print(f"Correo enviado a {email_receptor}")
+
+        print("Saliendo del bucle")  # Esta línea se mueve fuera del bucle
+        
+        
+
+

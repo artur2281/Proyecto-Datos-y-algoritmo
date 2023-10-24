@@ -7,7 +7,7 @@ class BaseDeDatos:
     def __init__(self):
 
         #inicialisamos donde se encuentre el archivo
-        self.archivo = 'G:\Proyecto final\Proyecto-Datos-y-algoritmo\intefaz\personas.xlsx'
+        self.archivo = r'C:\Users\Elia\Documents\GitHub\Proyecto-Datos-y-algoritmo\intefaz\personas.xlsx'
         datos = self.obtener_datos()
         if isinstance(datos, list) and all(isinstance(d, dict) for d in datos):
             self.personas = [Persona(**persona) for persona in datos]
